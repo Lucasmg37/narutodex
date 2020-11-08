@@ -4,6 +4,37 @@ const { createStampAndRelationship } = require('../../repositories/stampsReposit
 const Op = Sequelize.Op
 
 module.exports = {
+  processClassification: async (req, res) => {
+    try {
+      const jutsus = await Jutsu.findAll({
+        attributes: ['id', 'classification']
+      })
+
+      const jutsusClassification = []
+
+      jutsus.forEach(jutsu => {
+        if (!jutsu.classification) {
+          return
+        }
+
+        const classifications = jutsu.classification.split(',')
+        jutsusClassification.push(classifications)
+      })
+
+      res.send({
+        status: true,
+        message: jutsus.length + ' jutsus fouded.',
+        data: jutsusClassification
+      }).status(200)
+    } catch (err) {
+      console.error(err)
+      res.send({
+        status: true,
+        message: 'Erro!',
+        data: err
+      }).status(500)
+    }
+  },
   processHandstamp: async (req, res) => {
     try {
       const jutsus = await Jutsu.findAll(
@@ -206,4 +237,5 @@ module.exports = {
       }).status(500)
     }
   }
+
 }

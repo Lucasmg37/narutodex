@@ -16,6 +16,7 @@ routes.get('/api/v1/fandom/character/jutsus', fandomCharacterJutsuController)
 routes.get('/api/v1/fandom/jutsu', fandomJutsuController)
 
 routes.get('/api/v1/process/jutsu/handstamp', proccessDataHandstampController.processHandstamp)
+routes.get('/api/v1/process/jutsu/classification', proccessDataHandstampController.processClassification)
 
 routes.get('/api/v1/jutsu', jutsuController.index)
 
