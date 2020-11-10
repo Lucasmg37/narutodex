@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   Jutsu.associate = function (models) {
     Jutsu.hasMany(models.GroupJutsusStamp, { as: 'groupjutsusstamp' })
     Jutsu.belongsToMany(models.CharactersJutsu, { through: 'CharactersJutsus', foreignKey: 'characterId', as: 'characters' })
+    Jutsu.belongsToMany(models.Classification, { through: 'JutsusClassification', foreignKey: 'classificationId', as: 'classifications' })
   }
 
   return Jutsu

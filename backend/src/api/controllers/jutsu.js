@@ -1,4 +1,4 @@
-const { Jutsu, GroupJutsusStamp, Stamp } = require('../../models')
+const { Jutsu, GroupJutsusStamp, Stamp, Classification } = require('../../models')
 
 module.exports = {
   index: async (req, res) => {
@@ -10,6 +10,10 @@ module.exports = {
             model: GroupJutsusStamp,
             as: 'groupjutsusstamp',
             include: [{ model: Stamp, as: 'stamps' }]
+          },
+          {
+            model: Classification,
+            as: 'classifications'
           }
         ]
       })

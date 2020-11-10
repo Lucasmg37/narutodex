@@ -1,6 +1,8 @@
 const { Sequelize } = require('sequelize')
+const { getTextInsideTag, getAttributeTag } = require('../../../helpers/text')
 const { Jutsu } = require('../../../models')
 const { createStampAndRelationship } = require('../../repositories/stampsRepository')
+const { createClassificationAndRelationship } = require('../../repositories/classificationRepository')
 const Op = Sequelize.Op
 
 module.exports = {
@@ -18,8 +20,79 @@ module.exports = {
         }
 
         const classifications = jutsu.classification.split(',')
-        jutsusClassification.push(classifications)
+        const classificationsToSave = []
+
+        const addClassificationIfNotExists = classification => {
+          if (classificationsToSave.indexOf(classification) === -1) {
+            classificationsToSave.push(classification)
+          }
+        }
+
+        classifications.forEach(classification => {
+          const newClassification = getTextInsideTag('a', classification)
+
+          let attrImage = getAttributeTag('img', 'data-image-name', newClassification)
+
+          if (attrImage) {
+            attrImage = attrImage.replace('Símbolo', '')
+            attrImage = attrImage.replace('.svg', '').trim()
+            addClassificationIfNotExists(attrImage)
+          }
+
+          if (newClassification && newClassification.indexOf('img') === -1) {
+            addClassificationIfNotExists(newClassification)
+          }
+
+          if (classification.indexOf('Kekkei Genkai') > 1) {
+            addClassificationIfNotExists('Kekkei Genkai')
+          }
+
+          if (classification.indexOf('Hiden') > 1) {
+            addClassificationIfNotExists('Hiden')
+          }
+
+          if (classification.indexOf('Clã Yamanaka') > 1) {
+            addClassificationIfNotExists('Clã Yamanaka')
+          }
+
+          if (classification.indexOf('Liberação de Magnetismo') > 1) {
+            addClassificationIfNotExists('Liberação de Magnetismo')
+          }
+
+          if (classification.indexOf('Clã Hyuga') > 1) {
+            addClassificationIfNotExists('Clã Hyuga')
+          }
+
+          if (classification.indexOf('<') === -1 && classification.indexOf('>') === -1) {
+            addClassificationIfNotExists(classification)
+          }
+        })
+
+        jutsusClassification.push({ id: jutsu.toJSON().id, classifications: classificationsToSave })
       })
+
+      const createClassificationByJutsu = async index => {
+        const jutsuId = jutsusClassification[index].id
+        const classificationsByJutsu = jutsusClassification[index].classifications
+
+        const createClassification = async index => {
+          const classification = classificationsByJutsu[index]
+
+          await createClassificationAndRelationship(classification, jutsuId)
+
+          if (classificationsByJutsu[index + 1]) {
+            await createClassification(index + 1)
+          }
+        }
+
+        await createClassification(0)
+
+        if (jutsusClassification[index + 1]) {
+          await createClassificationByJutsu(index + 1)
+        }
+      }
+
+      await createClassificationByJutsu(0)
 
       res.send({
         status: true,
