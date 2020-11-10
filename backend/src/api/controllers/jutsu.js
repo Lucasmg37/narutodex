@@ -1,9 +1,10 @@
-const { Jutsu, GroupJutsusStamp, Stamp, Classification } = require('../../models')
+const { Jutsu, GroupJutsusStamp, Stamp, Classification, Character, Class } = require('../../models')
 
 module.exports = {
   index: async (req, res) => {
     try {
       const jutsus = await Jutsu.findAll({
+        attributes: ['id', 'class'],
         include:
         [
           {
@@ -12,8 +13,17 @@ module.exports = {
             include: [{ model: Stamp, as: 'stamps' }]
           },
           {
+            model: Character,
+            as: 'characters'
+          },
+          {
             model: Classification,
             as: 'classifications'
+
+          },
+          {
+            model: Class,
+            as: 'classes'
           }
         ]
       })

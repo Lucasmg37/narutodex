@@ -3,6 +3,7 @@ const { getTextInsideTag, getAttributeTag } = require('../../../helpers/text')
 const { Jutsu } = require('../../../models')
 const { createStampAndRelationship } = require('../../repositories/stampsRepository')
 const { createClassificationAndRelationship } = require('../../repositories/classificationRepository')
+const { createClassAndRelationship } = require('../../repositories/classRepository')
 const Op = Sequelize.Op
 
 module.exports = {
@@ -98,6 +99,66 @@ module.exports = {
         status: true,
         message: jutsus.length + ' jutsus fouded.',
         data: jutsusClassification
+      }).status(200)
+    } catch (err) {
+      console.error(err)
+      res.send({
+        status: true,
+        message: 'Erro!',
+        data: err
+      }).status(500)
+    }
+  },
+
+  processClass: async (req, res) => {
+    try {
+      const jutsus = await Jutsu.findAll({
+        attributes: ['id', 'class']
+      })
+
+      const jutsusClasses = []
+
+      jutsus.forEach(jutsu => {
+        if (!jutsu.class) {
+          return
+        }
+
+        let classToSave = jutsu.class.replace(' e ', ',').split(',')
+
+        classToSave = classToSave.map(classJutsu => {
+          return classJutsu.trim()
+        })
+
+        jutsusClasses.push({ id: jutsu.toJSON().id, classes: classToSave })
+      })
+
+      const createClassesByJutsu = async index => {
+        const jutsuId = jutsusClasses[index].id
+        const classes = jutsusClasses[index].classes
+
+        const createClass = async index => {
+          const classJutsu = classes[index]
+
+          await createClassAndRelationship(classJutsu, jutsuId)
+
+          if (classes[index + 1]) {
+            await createClass(index + 1)
+          }
+        }
+
+        await createClass(0)
+
+        if (jutsusClasses[index + 1]) {
+          await createClassesByJutsu(index + 1)
+        }
+      }
+
+      await createClassesByJutsu(0)
+
+      res.send({
+        status: true,
+        message: jutsus.length + ' jutsus fouded.',
+        data: jutsusClasses
       }).status(200)
     } catch (err) {
       console.error(err)
