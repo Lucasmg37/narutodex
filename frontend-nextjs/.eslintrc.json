@@ -1,0 +1,56 @@
+{
+    "env": {
+      "browser": true,
+      "es6": true
+    },
+    "extends": [
+      "plugin:react/recommended",
+      "airbnb",
+      "plugin:prettier/recommended"
+    ],
+    "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+    },
+    "plugins": [
+      "react",
+      "react-hooks",
+      "prettier",
+      "eslint-plugin-import-helpers"
+    ],
+    "rules": {
+      "prettier/prettier": "error",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
+      "import/prefer-default-export": "off",
+      "react/jsx-props-no-spreading": "off",
+      "import/no-unresolved": "off",
+      "camelcase": "off",
+      "react/prop-types": "off",
+      "no-console": "error",
+      "no-param-reassign": "off",
+      "react/jsx-indent": "off",
+      "react/jsx-one-expression-per-line": "off",
+      "jsx-a11y/no-noninteractive-element-interactions": "off",
+      "jsx-a11y/click-events-have-key-events": "off",
+      "react/jsx-curly-newline": "off",
+      "no-plusplus": "off",
+      "import/extensions": [
+        "error",
+        "ignorePackages",
+        {
+          "js": "never",
+          "jsx": "never"
+        }
+      ]
+    }
+  }
+  
