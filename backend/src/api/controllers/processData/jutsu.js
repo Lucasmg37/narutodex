@@ -4,6 +4,7 @@ const { Jutsu } = require('../../../models')
 const { createStampAndRelationship } = require('../../repositories/stampsRepository')
 const { createClassificationAndRelationship } = require('../../repositories/classificationRepository')
 const { createClassAndRelationship } = require('../../repositories/classRepository')
+const { createElementAndRelationship } = require('../../repositories/elementRepository')
 const Op = Sequelize.Op
 
 module.exports = {
@@ -159,6 +160,126 @@ module.exports = {
         status: true,
         message: jutsus.length + ' jutsus fouded.',
         data: jutsusClasses
+      }).status(200)
+    } catch (err) {
+      console.error(err)
+      res.send({
+        status: true,
+        message: 'Erro!',
+        data: err
+      }).status(500)
+    }
+  },
+
+  processDescriptionAndRank: async (req, res) => {
+    try {
+      const jutsus = await Jutsu.findAll({
+        attributes: ['id', 'description', 'rank']
+      })
+
+      const jutsusSave = jutsus.map(jutsu => {
+        let description = jutsu.description ? jutsu.description.replace(/<[^>]*>?/gm, '') : ''
+        let rank = jutsu.rank ? jutsu.rank.replace(/<[^>]*>?/gm, '') : ''
+        description = description.replace(/(\r\n|\n|\r)/gm, '')
+        rank = rank.replace(/(\r\n|\n|\r)/gm, '')
+        return { ...jutsu.toJSON(), description, rank }
+      })
+
+      await Promise.all(jutsusSave.forEach(async jutsu => {
+        const { description, id, rank } = jutsu
+
+        if (!description) {
+          return
+        }
+
+        try {
+          await Jutsu.update({ description, rank }, {
+            where: {
+              id
+            }
+          })
+        } catch (err) {
+          console.log(err)
+        }
+      }))
+
+      res.send({
+        status: true,
+        message: jutsus.length + ' jutsus fouded.',
+        data: jutsusSave
+      }).status(200)
+    } catch (err) {
+      console.error(err)
+      res.send({
+        status: true,
+        message: 'Erro!',
+        data: err
+      }).status(500)
+    }
+  },
+
+  processElement: async (req, res) => {
+    try {
+      const jutsus = await Jutsu.findAll({
+        attributes: ['id', 'element']
+      })
+
+      const jutsusSave = jutsus.map(jutsu => {
+        let element = jutsu.element ? jutsu.element.replace(/<[^>]*>?/gm, '') : ''
+        element = element.replace(/(\r\n|\n|\r)/gm, '')
+        element = element.split('Liberação de')
+
+        const elements = []
+
+        element.forEach(item => {
+          item = item.trim()
+
+          if (item) {
+            if (item === 'Yin–Yang') {
+              elements.push('Yin')
+              elements.push('Yang')
+              return
+            }
+
+            elements.push(item)
+          }
+        })
+
+        return { ...jutsu.toJSON(), elements }
+      })
+
+      const saveElementByJutsu = async (index) => {
+        const jutsu = jutsusSave[index]
+
+        const saveElement = async (indexEvent) => {
+          const element = jutsu.elements[indexEvent]
+
+          if (!element) {
+            return
+          }
+
+          console.log(element, jutsu.id)
+
+          await createElementAndRelationship(element, jutsu.id)
+
+          if (jutsu.elements[indexEvent + 1]) {
+            await saveElement(indexEvent + 1)
+          }
+        }
+
+        await saveElement(0)
+
+        if (jutsusSave[index + 1]) {
+          await saveElementByJutsu(index + 1)
+        }
+      }
+
+      await saveElementByJutsu(0)
+
+      res.send({
+        status: true,
+        message: jutsus.length + ' jutsus fouded.',
+        data: jutsusSave
       }).status(200)
     } catch (err) {
       console.error(err)

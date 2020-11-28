@@ -18,7 +18,11 @@ routes.get('/api/v1/fandom/jutsu', fandomJutsuController)
 routes.get('/api/v1/process/jutsu/handstamp', proccessDataHandstampController.processHandstamp)
 routes.get('/api/v1/process/jutsu/classification', proccessDataHandstampController.processClassification)
 routes.get('/api/v1/process/jutsu/class', proccessDataHandstampController.processClass)
+routes.get('/api/v1/process/jutsu/description', proccessDataHandstampController.processDescriptionAndRank)
+routes.get('/api/v1/process/jutsu/rank', proccessDataHandstampController.processDescriptionAndRank)
+routes.get('/api/v1/process/jutsu/elements', proccessDataHandstampController.processElement)
 
 routes.get('/api/v1/jutsu', jutsuController.index)
+routes.get('/api/v1/jutsu/:id/image', jutsuController.image)
 
 module.exports = routes

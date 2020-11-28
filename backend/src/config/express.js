@@ -1,5 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 const routes = require('../api/routes/routes.js')
 
 module.exports = () => {
@@ -8,7 +9,7 @@ module.exports = () => {
   app.set('port', process.env.PORT || 3333)
 
   app.use(bodyParser.json())
-
+  app.use(cors())
   app.use(routes)
 
   return app
