@@ -12,15 +12,15 @@ Todos os dados da plataforma são coletados do Naruto Fandom, os dados são trat
 
 ### ✔️ To Do
 
--[x] Estrutura inicial back end
+- [X] Estrutura inicial back end
 
--[X] Coletar dados do Fandom
+- [X] Coletar dados do Fandom
 
--[ ] Organizar dados coletados
+- [ ] Organizar dados coletados
 
--[x] Criar endpoints para front-end
+- [X] Criar endpoints para front-end
 
--[x] Criar estrutura React
+- [X] Criar estrutura React
 
--[x] Criar tela principal com listagem de jutusu em forma de card
+- [X] Criar tela principal com listagem de jutusu em forma de card
 ...
