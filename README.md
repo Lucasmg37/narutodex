@@ -1,4 +1,4 @@
-# 🍜 Ramen Justus - Em desenvolvimento
+# 🍜 Ramen Jutsus - Em desenvolvimento
 
 ## Uma plataforma para procurar dados de Jutsus e Personagens de Naruto
 
