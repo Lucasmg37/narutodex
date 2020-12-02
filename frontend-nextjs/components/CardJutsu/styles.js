@@ -1,4 +1,5 @@
 import styled, { css, keyframes } from 'styled-components';
+import { Container as Emoji } from '../Emoji/styles';
 
 const fadeIn = keyframes`
  from {
@@ -17,6 +18,7 @@ export const Container = styled.div`
   overflow: hidden;
   position: relative;
   z-index: 4;
+  transition: all ease 0.5s;
 
   ${({ position }) =>
     position &&
@@ -64,6 +66,22 @@ export const Container = styled.div`
     position === 2 &&
     css`
       margin-left: -275px;
+    `}
+
+    ${({ showOne, position }) =>
+    showOne &&
+    position < 0 &&
+    css`
+      opacity: 0;
+      margin-right: -360px;
+    `}
+
+    ${({ showOne, position }) =>
+    showOne &&
+    position > 0 &&
+    css`
+      margin-left: -360px;
+      opacity: 0;
     `}
 `;
 
@@ -182,6 +200,7 @@ export const BackCard = styled.div`
     height: 100%;
     position: absolute;
     z-index: 1;
+    transform: scale(1.1);
   }
 
   backface-visibility: hidden;
@@ -189,12 +208,6 @@ export const BackCard = styled.div`
 
 export const FrontCard = styled.div`
   backface-visibility: hidden;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
 
   header {
     width: 100%;
@@ -219,6 +232,12 @@ export const FrontCard = styled.div`
       z-index: 1;
       top: 0;
       left: 0;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     button {
@@ -364,6 +383,13 @@ export const FrontCard = styled.div`
         padding: 8px 16px;
         border-radius: 24px;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        ${Emoji} {
+          margin-right: 8px;
+        }
       }
     }
   }

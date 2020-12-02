@@ -22,5 +22,5 @@ Todos os dados da plataforma são coletados do Naruto Fandom, os dados são trat
 
 - [X] Criar estrutura React
 
-- [X] Criar tela principal com listagem de jutusu em forma de card
+- [X] Criar tela principal com listagem de jutsus em forma de card
 ...

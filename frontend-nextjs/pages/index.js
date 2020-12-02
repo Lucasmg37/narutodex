@@ -1,12 +1,13 @@
 import React, { useCallback, useState } from 'react';
 import Head from 'next/head';
 import { GiPerspectiveDiceSixFacesOne } from 'react-icons/gi';
-import { FiChevronLeft, FiChevronRight, FiSearch } from 'react-icons/fi';
+import { FiSearch } from 'react-icons/fi';
 import { FaRandom } from 'react-icons/fa';
-import CardJutsu from '../components/CardJutsu';
+import { motion, AnimatePresence } from 'framer-motion';
 import api from '../services/api';
-import styles from '../styles/Home.module.scss';
 import CardStamps from '../components/CardStamps';
+import CardsCarousel from '../components/CardsCarousel';
+import { Container, TopMenu } from '../styles/Home';
 
 export async function getStaticProps() {
   const { data } = await api.get('jutsu');
@@ -19,24 +20,36 @@ export async function getStaticProps() {
   };
 }
 
+const styles = {};
+
 export default function Home({ jutsus }) {
   const [current, setCurrent] = useState(2);
   const [currentJutsu, setCurrentJutsu] = useState(jutsus[2]);
+
+  const [showStamps, setShowStamps] = useState(false);
 
   const changeCurrent = useCallback(
     positon => {
       setCurrent(positon);
       setCurrentJutsu(jutsus[positon]);
+      setShowStamps(false);
     },
     [jutsus],
   );
 
   return (
-    <div className={styles.container}>
+    <Container>
+      <Head>
+        <title>Ramen Jutsus</title>
+      </Head>
+
+      <img className="background" src={`http://localhost:3333/api/v1/jutsu/${currentJutsu.id}/image`} alt="" />
+
       <aside>
         <nav>
           <ul>
             <li>
+              <div className="transition" />
               <FiSearch /> <span>Pesquisar</span>
             </li>
             <li>
@@ -49,10 +62,8 @@ export default function Home({ jutsus }) {
         </nav>
       </aside>
 
-      <img className={styles.background} src={`http://localhost:3333/api/v1/jutsu/${currentJutsu.id}/image`} alt="" />
-
       <main>
-        <section className={styles.topMenu}>
+        <TopMenu>
           <ul>
             <li>
               <img src="/images/steaming-bowl_1f35c.png" alt="" /> RAMEN JUTSUS
@@ -63,66 +74,37 @@ export default function Home({ jutsus }) {
               <button type="button">🧘 Personagens</button>
             </li>
           </ul>
-        </section>
+        </TopMenu>
 
         <article>
-          <section className={styles.cards}>
-            <button onClick={() => changeCurrent(current - 1)} type="button" className={styles.previous}>
-              <FiChevronLeft />
-            </button>
+          <CardsCarousel
+            setShowStamps={setShowStamps}
+            showStamps={showStamps}
+            jutsus={jutsus}
+            changeCurrent={changeCurrent}
+            current={current}
+          />
 
-            {jutsus &&
-              jutsus.map((jutsu, index) => {
-                if (
-                  index === current ||
-                  index === current - 1 ||
-                  index === current + 1 ||
-                  index === current + 2 ||
-                  index === current - 2
-                ) {
-                  let position = 0;
-
-                  if (index === current - 2) {
-                    position = -2;
-                  }
-
-                  if (index === current - 1) {
-                    position = -1;
-                  }
-
-                  if (index === current) {
-                    position = 0;
-                  }
-
-                  if (index === current + 1) {
-                    position = 1;
-                  }
-
-                  if (index === current + 2) {
-                    position = 2;
-                  }
-
-                  return (
-                    <CardJutsu
-                      jutsu={{
-                        ...jutsu,
-                        position,
-                      }}
-                    />
-                  );
-                }
-                return null;
-              })}
-
-            <button type="button" onClick={() => changeCurrent(current + 1)} className={styles.next}>
-              <FiChevronRight />
-            </button>
-          </section>
-          <section className={styles.stamps}>
-            {!!currentJutsu.groupjutsusstamp.length && <CardStamps groupJutsusStamp={currentJutsu.groupjutsusstamp} />}
-          </section>
+          <AnimatePresence>
+            {!!showStamps && (
+              <motion.section
+                initial={{ marginRight: -360, opacity: 0 }}
+                animate={{ marginRight: 0, opacity: 1 }}
+                exit={{ marginRight: -380, opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                className={styles.stamps}
+              >
+                {!!currentJutsu.groupjutsusstamp.length && (
+                  <CardStamps
+                    onCloseStamps={() => setShowStamps(false)}
+                    groupJutsusStamp={currentJutsu.groupjutsusstamp}
+                  />
+                )}
+              </motion.section>
+            )}
+          </AnimatePresence>
         </article>
       </main>
-    </div>
+    </Container>
   );
 }

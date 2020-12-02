@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FiChevronDown, FiChevronUp, FiXCircle } from 'react-icons/fi';
 import { classesToString, classificationsToString } from '../../utils/jutsu';
+import Emoji from '../Emoji';
+import { handWithFingersSplayed, magnifyingGlassTiltedLeft } from '../Emoji/emojis';
 
 import { BackCard, Container, Content, FrontCard, SeeMoreButton } from './styles';
 
-function CardJutsu({ jutsu }) {
+function CardJutsu({ jutsu, handleShowStamps, showOne }) {
   const infoRef = useRef(null);
   const [showArrowUp, setShowArrowUp] = useState(false);
   const [isBack, setIsBack] = useState(false);
@@ -45,7 +47,7 @@ function CardJutsu({ jutsu }) {
   }, [height]);
 
   return (
-    <Container position={jutsu.position}>
+    <Container position={jutsu.position} showOne={showOne}>
       <Content isBack={isBack && jutsu.position === 0}>
         <FrontCard upButtonBottom={20 + margin} heightMain={height} marginTopMain={-margin}>
           <header>
@@ -80,10 +82,15 @@ function CardJutsu({ jutsu }) {
             </div>
 
             <footer>
-              {!!jutsu.groupjutsusstamp.length && <button type="button">☝️ Selos</button>}
+              {!!jutsu.groupjutsusstamp.length && (
+                <button onClick={handleShowStamps} type="button">
+                  <Emoji emoji={handWithFingersSplayed} height="32px" /> Selos
+                </button>
+              )}
 
               <button type="button" onClick={handleFlipCard}>
-                🔍 Info
+                <Emoji emoji={magnifyingGlassTiltedLeft} height="32px" />
+                Info
               </button>
             </footer>
 

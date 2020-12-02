@@ -1,58 +1,15 @@
-.container {
+import styled, { css } from 'styled-components';
+
+export const Container = styled.div`
   display: flex;
   min-height: 100vh;
   width: 100vw;
-  background: #1b2c46d7;
+  background: rgba(17, 17, 17, 0.9);
 
   main {
     display: flex;
     flex-direction: column;
     flex: 1;
-
-    .topMenu {
-      padding: 16px 64px;
-
-      ul {
-        list-style: none;
-        display: flex;
-
-        li:first-child {
-          font-weight: 900;
-          color: #fff;
-          display: flex;
-          align-items: center;
-          font-size: 2rem;
-          margin-right: auto;
-
-          img {
-            height: 60px;
-            margin-right: 8px;
-          }
-        }
-
-        li:last-child {
-          button {
-            border: 3px solid #df872d;
-            font-size: 1.3rem;
-            padding: 8px 24px;
-            font-weight: bold;
-            background: none;
-            cursor: pointer;
-            color: #fff;
-          }
-
-          button:first-child {
-            border-radius: 24px 0 0 24px;
-
-            background: #df872d;
-          }
-
-          button:last-child {
-            border-radius: 0 24px 24px 0;
-          }
-        }
-      }
-    }
 
     article {
       display: flex;
@@ -61,18 +18,11 @@
       flex: 1;
     }
 
-    .cards {
-      display: flex;
-      flex: 1;
-      align-items: center;
-      justify-content: center;
-    }
-
     .stamps {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: auto;
+      margin-left: 80px;
     }
   }
 
@@ -87,7 +37,6 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      // align-items: center;
       justify-content: space-around;
 
       li {
@@ -103,6 +52,23 @@
         cursor: pointer;
         border: 3px solid #df872d;
         transition: all ease-in-out 0.2s;
+
+        .transition {
+          width: 0vw;
+          height: 0vw;
+          background: #df872d;
+          position: absolute;
+          border-radius: 50%;
+          transition: all ease-in 1s;
+          z-index: 999;
+
+          ${({ showTransition }) =>
+            showTransition &&
+            css`
+              width: 250vw;
+              height: 250vw;
+            `}
+        }
 
         span {
           transition: all ease-in-out 0.2s;
@@ -136,24 +102,49 @@
     filter: blur(5px);
     z-index: -1;
   }
-}
+`;
 
-.next,
-.previous {
-  background: none;
-  width: 64px;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  color: #fff;
-  font-size: 1.8rem;
-  cursor: pointer;
-  border: 3px solid #df872d;
-  transition: all ease-in-out 0.2s;
+export const TopMenu = styled.section`
+  padding: 64px 64px 16px;
 
-  &:hover {
-    background: #df872d;
+  ul {
+    list-style: none;
+    display: flex;
+
+    li:first-child {
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      font-size: 2rem;
+      margin-right: auto;
+
+      img {
+        height: 60px;
+        margin-right: 8px;
+      }
+    }
+
+    li:last-child {
+      button {
+        border: 3px solid #df872d;
+        font-size: 1.3rem;
+        padding: 8px 24px;
+        font-weight: bold;
+        background: none;
+        cursor: pointer;
+        color: #fff;
+      }
+
+      button:first-child {
+        border-radius: 24px 0 0 24px;
+
+        background: #df872d;
+      }
+
+      button:last-child {
+        border-radius: 0 24px 24px 0;
+      }
+    }
   }
-}
+`;

@@ -1,27 +1,34 @@
 import React from 'react';
+import { FiX } from 'react-icons/fi';
+import Emoji from '../Emoji';
+import { handWithFingersSplayed } from '../Emoji/emojis';
+
 import { Container } from './styles';
 
-function CardStamps({ groupJutsusStamp = [] }) {
-  // console.log(groupJutsusStamp[0].stamps);
-
+function CardStamps({ groupJutsusStamp = [], onCloseStamps }) {
   return (
     <Container>
-      <h3>☝️ Selos</h3>
+      <button onClick={onCloseStamps} type="button">
+        <FiX />
+      </button>
 
-      <ul>
-        {!!groupJutsusStamp.length &&
-          groupJutsusStamp[0].stamps.map(item => {
-            return (
-              <li>
-                <img
-                  src="https://raw.githubusercontent.com/Lucasmg37/ninjutsu-learn-game/main/src/assets/img/maos/1.png"
-                  alt=""
-                />
-                {item.name}
-              </li>
-            );
-          })}
-      </ul>
+      <div>
+        <h3>
+          <Emoji height="32px" emoji={handWithFingersSplayed} /> Selos
+        </h3>
+
+        <ul>
+          {!!groupJutsusStamp.length &&
+            groupJutsusStamp[0].stamps.map(item => {
+              return (
+                <li>
+                  {!!item.image && <img src={`http://localhost:3333${item.image}`} alt={item.name} />}
+                  {item.name}
+                </li>
+              );
+            })}
+        </ul>
+      </div>
     </Container>
   );
 }
