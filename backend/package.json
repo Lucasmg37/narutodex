@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./src/server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cli": "node ./src/cli/index.js"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +16,11 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "inquirer": "^7.3.3",
+    "node-fetch": "^2.6.1",
+    "ora": "^5.1.0",
     "sequelize": "^6.3.5",
+    "serve-index": "^1.9.1",
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {

@@ -10,6 +10,7 @@ module.exports = () => {
 
   app.use(bodyParser.json())
   app.use(cors())
+  app.use('/assets', express.static('./assets'))
   app.use(routes)
 
   return app

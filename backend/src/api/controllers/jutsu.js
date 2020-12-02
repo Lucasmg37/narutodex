@@ -120,9 +120,9 @@ module.exports = {
 
       const response = await fetch(image)
       const buffer = await response.buffer()
-      fs.writeFile(pathImage, buffer, () => {})
-
-      res.sendFile(pathImage, { root: './' })
+      fs.writeFile(pathImage, buffer, () => {
+        res.sendFile(pathImage, { root: './' })
+      })
     } catch (err) {
       console.error(err)
       res.send({
