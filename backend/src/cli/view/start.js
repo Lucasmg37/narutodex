@@ -2,6 +2,7 @@ const inquirer = require('inquirer')
 const { START_ALL, START_GET, START_TREATMENT } = require('../constants')
 const { questionsStart } = require('../questions/main')
 const { index } = require('./treatment')
+const { index: get } = require('./get')
 
 module.exports = {
   index: () => {
@@ -13,7 +14,7 @@ module.exports = {
           console.log('To Do')
           break
         case START_GET:
-          console.log('To Do')
+          get()
           break
         case START_TREATMENT:
           index()

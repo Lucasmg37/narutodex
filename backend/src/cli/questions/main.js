@@ -26,4 +26,22 @@ const questionsTreatmentJutsus = {
   ]
 }
 
-module.exports = { questionsStart, questionsTreatment, questionsTreatmentJutsus }
+const questionsGet = {
+  type: 'list',
+  name: 'Qual informação você deseja Buscar?',
+  choices: [
+    { name: 'Jutsus', value: 2 },
+    { name: 'Characters', value: 1 }
+  ]
+}
+
+const questionsCharacter = {
+  type: 'list',
+  name: 'Qual informação você deseja buscar dos Personagens?',
+  choices: [
+    { name: 'Imagens', value: 2 },
+    { name: 'Todos os dados', value: 1 }
+  ]
+}
+
+module.exports = { questionsStart, questionsTreatment, questionsTreatmentJutsus, questionsGet, questionsCharacter }

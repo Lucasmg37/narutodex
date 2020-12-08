@@ -1,6 +1,4 @@
-const { default: Axios } = require('axios')
-const { Op } = require('sequelize')
-const { Jutsu, GroupJutsusStamp, Stamp, Classification, Character, Class, Element } = require('../../models')
+const { Jutsu, GroupJutsusStamp, Stamp, Classification, Class, Element } = require('../../models')
 const fs = require('fs')
 const fetch = require('node-fetch')
 
@@ -8,12 +6,9 @@ module.exports = {
   index: async (req, res) => {
     try {
       const jutsus = await Jutsu.findAll({
-        // attributes: ['image']
-        // where: {
-        //   type: {
-        //     [Op.ne]: null
-        //   }
-        // }
+        order: [
+          ['name', 'ASC']
+        ],
         include:
         [
           {
@@ -40,33 +35,10 @@ module.exports = {
         ]
       })
 
-      const jutsusData = []
-
-      jutsus.forEach(jutsu => {
-        const newJutsu = jutsu.toJSON()
-
-        let image = newJutsu.image
-
-        if (image) {
-          image = image.replace('&amp;', '&')
-          const prefix = image.split('latest?cb=')[0]
-          let date = image.split('latest?cb=')[1]
-          const postfix = date.split('&')[1]
-          date = image.split('&')[0]
-
-          const d = new Date()
-          const now = d.getTime()
-
-          image = prefix + 'latest?cb=' + now + '&' + postfix
-        }
-
-        jutsusData.push({ ...newJutsu, image })
-      })
-
       res.send({
         status: true,
-        message: 'Character descriptions updated.',
-        data: jutsusData
+        message: 'Jutsus retornados com sucesso.',
+        data: jutsus
       }).status(200)
     } catch (err) {
       console.error(err)
@@ -80,10 +52,10 @@ module.exports = {
   image: async (req, res) => {
     const { id } = req.params
 
-    const image = './public/images/jutsus/' + id + '.jpg'
+    const imagePath = './public/images/jutsus/' + id + '.jpg'
 
-    if (fs.existsSync(image)) {
-      res.sendFile(image, { root: './' })
+    if (fs.existsSync(imagePath)) {
+      res.sendFile(imagePath, { root: './' })
       return
     }
 
@@ -94,34 +66,16 @@ module.exports = {
         return
       }
 
-      const newJutsu = jutsu.toJSON()
-
-      let image = newJutsu.image
+      let image = jutsu.image
 
       if (image) {
         image = image.replace('&amp;', '&')
-        const prefix = image.split('latest?cb=')[0]
-        let date = image.split('latest?cb=')[1]
-        const postfix = date.split('&')[1]
-        date = image.split('&')[0]
-
-        const d = new Date()
-        const now = d.getTime()
-
-        image = prefix + 'latest?cb=' + now + '&' + postfix
-      }
-
-      const pathImage = './public/images/jutsus/' + newJutsu.id + '.jpg'
-
-      if (fs.existsSync(pathImage)) {
-        res.sendFile(pathImage, { root: './' })
-        return
       }
 
       const response = await fetch(image)
       const buffer = await response.buffer()
-      fs.writeFile(pathImage, buffer, () => {
-        res.sendFile(pathImage, { root: './' })
+      fs.writeFile(imagePath, buffer, () => {
+        res.sendFile(imagePath, { root: './' })
       })
     } catch (err) {
       console.error(err)

@@ -6,7 +6,7 @@ export const handWithFingersSplayed = {
 };
 
 export const steamingBowl = {
-  img: `${path}steamingBowl-1f35c.png`,
+  img: `${path}steaming-bowl_1f35c.png`,
   alt: 'Emoji. Tigela de Ramen.',
 };
 
@@ -15,9 +15,22 @@ export const magnifyingGlassTiltedLeft = {
   alt: 'Emoji. Lupa na esquerda.',
 };
 
+export const person = {
+  img: `${path}person_1f9d1.png`,
+  alt: 'Emoji. Pessoa.',
+};
+
+export const yinYang = {
+  img: `${path}yin-yang_262f-fe0f.png`,
+  alt: 'Emoji. Lupa na esquerda.',
+};
+
 const jutsus = {
   handWithFingersSplayed,
   steamingBowl,
+  magnifyingGlassTiltedLeft,
+  person,
+  yinYang,
 };
 
 export default jutsus;
