@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-import { Container as Brand } from '../components/Brand/styles';
 import { Container as Emoji } from '../components/Emoji/styles';
 
 export const Container = styled.div`
@@ -11,51 +10,79 @@ export const Container = styled.div`
   flex-direction: column;
 
   section + section {
-    width: 800px;
-    margin: auto;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
 
-    header {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      text-align: center;
+    main {
+      width: 800px;
+      margin: auto;
+    }
 
-      ${Brand} {
-        margin: auto;
-      }
+    & > div {
+      width: 800px;
+      margin: 40px auto;
 
       h1 {
-        margin-top: 32px;
-        color: #111;
+        max-width: 400px;
+        color: #df872d;
+        font-size: 64px;
+        margin-bottom: 24px;
+      }
+
+      h2 {
+        max-width: 600px;
+        color: #df872d;
+        font-size: 32px;
+        margin-bottom: 24px;
+        font-weight: normal;
+        opacity: 0.7;
       }
     }
-    main {
-      margin: 40px 0;
+
+    ul {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      padding: 64px;
+      grid-gap: 24px;
     }
   }
 `;
 
 export const ItemResult = styled.li`
   display: flex;
-  background: #111;
+  background: #222;
   border: 1px solid #df872d;
   border-radius: 0.5rem;
-  align-items: center;
-  margin-bottom: 1rem;
-  min-height: 5rem;
+  flex-direction: column;
+  cursor: pointer;
+  transition: ease all 0.2s;
+
+  &:hover {
+    transform: scale(1.08);
+
+    & > img {
+      filter: grayscale(0);
+    }
+  }
 
   & > div {
-    margin: auto 1rem;
+    margin: 8px 0;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 
     h1 {
       color: #df872d;
+      margin-bottom: 0.5rem;
     }
 
     span {
       display: flex;
-      align-items: center;
       color: #fff;
-      margin-top: 0.5rem;
+      margin-top: auto;
 
       ${Emoji} {
         height: 1.5rem;
@@ -65,25 +92,12 @@ export const ItemResult = styled.li`
     }
   }
 
-  img {
-    width: 7rem;
-    height: 7rem;
+  & > img {
+    width: 100%;
+    height: 250px;
     object-fit: cover;
-    border-radius: 0.5rem;
-  }
-
-  button {
-    height: 48px;
-    width: 48px;
-    border-radius: 50%;
-    background: #222;
-    color: #df872d;
-    border: none;
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: auto 1rem auto auto;
-    cursor: pointer;
+    border-radius: 0.5rem 0.5rem 0 0;
+    filter: grayscale(1);
+    transition: ease 0.2s all;
   }
 `;

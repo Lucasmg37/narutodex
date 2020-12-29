@@ -37,7 +37,11 @@ export const Container = styled.div`
       list-style: none;
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
+      justify-content: center;
+
+      li + li {
+        margin-top: 16px;
+      }
 
       li button {
         background: none;

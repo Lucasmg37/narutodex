@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import Head from 'next/head';
-import { FiLink2, FiSearch } from 'react-icons/fi';
 
 import Header from 'components/Header';
 import InputSearch from 'components/InputSearch';
+
 import Emoji from '../components/Emoji';
 
 import { Container, ItemResult } from '../styles/Search';
@@ -32,6 +32,7 @@ export default function Search() {
       <Header
         showSwitch={false}
         showSearch={!!search}
+        showGoBack
         searchOptions={{ defaultSearch: search, onSubmit: handleSearch }}
       />
 
@@ -40,6 +41,13 @@ export default function Search() {
           <main>
             <InputSearch onSubmit={handleSearch} />
           </main>
+        )}
+
+        {!search && (
+          <div>
+            <h1>Qual Jutsu você quer Dominar?</h1>
+            <h2>Use a busca para procurar personagens e habilidades de Naruto, Naruto Shippunden e Boruto.</h2>
+          </div>
         )}
 
         <ul>
@@ -61,10 +69,6 @@ export default function Search() {
                     )}
                   </span>
                 </div>
-
-                <button type="button">
-                  <FiLink2 />
-                </button>
               </ItemResult>
             );
           })}

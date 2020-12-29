@@ -11,7 +11,32 @@ export const Container = styled.section`
       margin-right: auto;
     }
 
-    li:last-child {
+    .backButton {
+      background: #df872d;
+      color: #fff;
+      height: 64px;
+      margin-right: 8px;
+      border: none;
+      font-size: 24px;
+      border-radius: 32px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: all ease 0.2s;
+      border: 3px solid transparent;
+
+      &:hover {
+        border: 3px solid #df872d;
+        background: none;
+      }
+
+      svg {
+        margin-right: 8px;
+      }
+    }
+
+    li.toogle {
       button {
         border: 3px solid #df872d;
         font-size: 1.3rem;

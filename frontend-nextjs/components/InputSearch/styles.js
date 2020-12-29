@@ -26,15 +26,15 @@ export const Container = styled.form`
     border: none;
     cursor: pointer;
     background: #df872d;
-    font-size: 16px;
+    font-size: 24px;
+    /* font-weight: bold; */
     padding: auto 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100px;
+    width: 150px;
     border-radius: 50px;
     transform: scale(1.05);
-    color: #111;
-    font-weight: lighter;
+    color: #fff;
   }
 `;

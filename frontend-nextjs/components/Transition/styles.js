@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 export const Container = styled.div`
   width: 0vw;
   height: 0vw;
-  background: #df872d;
+  background: #111;
   position: absolute;
   border-radius: 50%;
   transition: all ease-in 0.3s;
