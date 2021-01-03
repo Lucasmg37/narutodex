@@ -304,69 +304,6 @@ export const FrontCard = styled.div`
       opacity: 0.7;
     }
 
-    .contentInfo {
-      display: flex;
-      margin-top: auto;
-
-      .rank {
-        border: dashed 3px rgba(51, 51, 51, 0.363);
-        padding: 10px 16px;
-        border-radius: 8px;
-        flex: 1;
-        display: flex;
-        align-items: center;
-        position: relative;
-        font-weight: 500;
-        text-align: center;
-      }
-
-      .rank + div {
-        margin-left: 8px;
-      }
-
-      .rank span {
-        position: absolute;
-        background: #df872d;
-        top: -12px;
-        padding: 0 8px;
-        font-weight: 300;
-        color: #333;
-      }
-    }
-
-    .class {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      font-weight: 500;
-      margin-top: 16px;
-    }
-
-    .class span {
-      padding: 0 8px;
-      font-weight: 300;
-      color: #333;
-      margin-bottom: 4px;
-    }
-
-    .classification {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      font-weight: 500;
-      margin-top: 16px;
-      text-align: center;
-    }
-
-    .classification span {
-      padding: 0 8px;
-      font-weight: 300;
-      color: #333;
-      margin-bottom: 4px;
-    }
-
     footer {
       display: flex;
       align-items: center;

@@ -23,6 +23,7 @@ routes.get('/api/v1/process/jutsu/class', proccessDataHandstampController.proces
 routes.get('/api/v1/process/jutsu/elements', proccessDataHandstampController.processElement)
 
 routes.get('/api/v1/jutsu', jutsuController.index)
+routes.get('/api/v1/jutsu/:id', jutsuController.getOne)
 routes.get('/api/v1/search', searchController.index)
 routes.get('/api/v1/jutsu/:id/image', jutsuController.image)
 

@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Header from 'components/Header';
 import InputSearch from 'components/InputSearch';
 
+import { useRouter } from 'next/router';
 import Emoji from '../components/Emoji';
 
 import { Container, ItemResult } from '../styles/Search';
@@ -22,6 +23,8 @@ export default function Search() {
     const { data } = await api.get('search', { params: { q: searchValue } });
     setResult(data.data);
   }, []);
+
+  const router = useRouter();
 
   return (
     <Container>
@@ -53,7 +56,7 @@ export default function Search() {
         <ul>
           {result.map(item => {
             return (
-              <ItemResult key={item.id}>
+              <ItemResult onClick={() => router.push(`/jutsus/${item.id}`)} key={item.id}>
                 <img src={item.image} alt={item.name} />
                 <div>
                   <h1>{item.name}</h1>

@@ -1,4 +1,4 @@
-const { Jutsu, GroupJutsusStamp, Stamp, Classification, Class, Element } = require('../../models')
+const { Jutsu, GroupJutsusStamp, Stamp, Classification, Class, Element, Character } = require('../../models')
 const fs = require('fs')
 const fetch = require('node-fetch')
 
@@ -49,6 +49,54 @@ module.exports = {
       }).status(500)
     }
   },
+
+  getOne: async (req, res) => {
+    try {
+      const { id } = req.params
+
+      const jutsu = await Jutsu.findOne({
+        where: { id },
+        include:
+        [
+          {
+            model: GroupJutsusStamp,
+            as: 'groupjutsusstamp',
+            include: [{ model: Stamp, as: 'stamps' }]
+          },
+          {
+            model: Character,
+            as: 'characters'
+          },
+          {
+            model: Classification,
+            as: 'classifications'
+          },
+          {
+            model: Class,
+            as: 'classes'
+          },
+          {
+            model: Element,
+            as: 'elements'
+          }
+        ]
+      })
+
+      res.send({
+        status: true,
+        message: 'Jutsu retornado com sucesso.',
+        data: jutsu
+      }).status(200)
+    } catch (err) {
+      console.error(err)
+      res.send({
+        status: true,
+        message: 'Erro!',
+        data: {}
+      }).status(500)
+    }
+  },
+
   image: async (req, res) => {
     const { id } = req.params
 
