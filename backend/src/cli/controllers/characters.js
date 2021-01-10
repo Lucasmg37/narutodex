@@ -36,6 +36,42 @@ module.exports = {
     }
 
     await insertImage(0)
+  },
+
+  processDescription: async () => {
+    const characters = await Character.findAll({
+      attributes: ['id', 'description']
+    })
+
+    const charactersSave = characters.map(character => {
+      if (!character.description) {
+        return { ...character.toJSON() }
+      }
+
+      let description = character.description ? character.description.replace(/<[^>]*>?/gm, '') : ''
+      description = description.replace(/&#91;[0-9]+&#93;/gm, '')
+      description = description.replace(/(\r\n|\n|\r)/gm, '')
+      return { ...character.toJSON(), description }
+    })
+
+    await Promise.all(charactersSave.forEach(async character => {
+      const id = character.id || ''
+      const description = character.description || ''
+
+      if (!description || !id) {
+        return
+      }
+
+      try {
+        await Character.update({ description }, {
+          where: {
+            id
+          }
+        })
+      } catch (err) {
+        console.log(err)
+      }
+    }))
   }
 
 }

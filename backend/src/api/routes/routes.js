@@ -28,6 +28,8 @@ routes.get('/api/v1/search', searchController.index)
 routes.get('/api/v1/jutsu/:id/image', jutsuController.image)
 
 routes.get('/api/v1/character/:id/image', characterController.image)
+routes.get('/api/v1/character/:id', characterController.getOne)
+routes.get('/api/v1/character', characterController.index)
 
 routes.get('/test', testController.index)
 

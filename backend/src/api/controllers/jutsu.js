@@ -16,10 +16,10 @@ module.exports = {
             as: 'groupjutsusstamp',
             include: [{ model: Stamp, as: 'stamps' }]
           },
-          // {
-          //   model: Character,
-          //   as: 'characters'
-          // },
+          {
+            model: Character,
+            as: 'characters'
+          },
           {
             model: Classification,
             as: 'classifications'

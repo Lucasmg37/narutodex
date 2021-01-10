@@ -1,4 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+import { Container as Emoji } from '../Emoji/styles';
 
 export const LiNav = styled.li`
   flex: 1;
@@ -9,11 +11,12 @@ export const LiNav = styled.li`
   color: #fff;
   cursor: pointer;
   transition: ease 0.2s all;
-
-  background: ${({ isActive }) => (isActive ? '#333' : 'transparrent')};
+  border-radius: 50px;
+  margin: 8px;
+  background: ${({ isActive }) => (isActive ? '#222' : '#111')};
 
   &:hover {
-    background: #333;
+    background: #222;
   }
 `;
 
@@ -23,6 +26,69 @@ export const Container = styled.div`
   height: 600px;
   border-radius: 16px;
   overflow: hidden;
+  z-index: 4;
+  transition: all ease 0.5s;
+
+  ${({ position }) =>
+    position &&
+    (position === 1 || position === -1) &&
+    css`
+      transform: scale(0.9);
+      z-index: 3;
+    `};
+
+  ${({ position }) =>
+    position &&
+    (position === 2 || position === -2) &&
+    css`
+      opacity: 0.5;
+      transform: scale(0.7);
+      z-index: 2;
+    `};
+
+  ${({ position }) =>
+    position &&
+    position === -1 &&
+    css`
+      margin-right: -280px;
+    `};
+
+  ${({ position }) =>
+    position &&
+    position === 1 &&
+    css`
+      margin-left: -280px;
+    `};
+
+  ${({ position }) =>
+    position &&
+    position === -2 &&
+    css`
+      margin-right: -257px;
+    `};
+
+  ${({ position }) =>
+    position &&
+    position === 2 &&
+    css`
+      margin-left: -275px;
+    `};
+
+  ${({ showOne, position }) =>
+    showOne &&
+    position < 0 &&
+    css`
+      opacity: 0;
+      margin-right: -360px;
+    `};
+
+  ${({ showOne, position }) =>
+    showOne &&
+    position > 0 &&
+    css`
+      margin-left: -360px;
+      opacity: 0;
+    `};
 
   main {
     display: flex;
@@ -34,7 +100,6 @@ export const Container = styled.div`
       ul {
         display: flex;
         list-style: none;
-        background: #111;
       }
     }
 
@@ -75,6 +140,12 @@ export const Container = styled.div`
             color: #fff;
             width: 100%;
             border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &:hover {
+              background: rgba(0, 0, 0, 0.5);
+            }
 
             img {
               width: 72px;
@@ -183,16 +254,29 @@ export const Container = styled.div`
     position: relative;
     display: flex;
     height: 100%;
+    cursor: pointer;
+    overflow: hidden;
 
-    img {
+    ${({ position }) =>
+      position === 0 &&
+      css`
+        &:hover {
+          > img {
+            transform: scale(1.1);
+          }
+        }
+      `};
+
+    & > img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       position: absolute;
       z-index: 0;
+      transition: ease 0.2s all;
     }
 
-    div {
+    & > div {
       background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.9) 100%);
       z-index: 1;
       margin-top: auto;
@@ -201,8 +285,18 @@ export const Container = styled.div`
       padding: 24px;
       font-size: 32px;
       display: flex;
-      align-items: flex-end;
+      justify-content: flex-end;
       color: #df872d;
+      flex-direction: column;
+
+      & > div {
+        display: flex;
+        margin-top: 16px;
+
+        ${Emoji} {
+          height: 40px;
+        }
+      }
     }
   }
 `;

@@ -12,6 +12,7 @@ const questionsTreatment = {
   type: 'list',
   name: 'Qual informação você deseja Processar?',
   choices: [
+    { name: 'Characters', value: 3 },
     { name: 'Jutsus', value: 2 },
     { name: 'Stamps', value: 1 }
   ]
@@ -44,4 +45,12 @@ const questionsCharacter = {
   ]
 }
 
-module.exports = { questionsStart, questionsTreatment, questionsTreatmentJutsus, questionsGet, questionsCharacter }
+const questionsTreatmentCharacter = {
+  type: 'list',
+  name: 'Qual informação você deseja processar dos Personagens?',
+  choices: [
+    { name: 'Description', value: 1 }
+  ]
+}
+
+module.exports = { questionsStart, questionsTreatmentCharacter, questionsTreatment, questionsTreatmentJutsus, questionsGet, questionsCharacter }

@@ -1,10 +1,11 @@
 const inquirer = require('inquirer')
 const ora = require('ora')
 const { questionsTreatment } = require('../questions/main')
-const { TREATMENT_STAMPS, TREATMENT_JUTSUS } = require('../constants')
+const { TREATMENT_STAMPS, TREATMENT_JUTSUS, TREATMENT_CHARACTERS } = require('../constants')
 const { confirmAction } = require('../utils/inquirer')
 const { processHandstamp } = require('../controllers/stamps')
 const { index } = require('./jutsu')
+const { treatment } = require('./character')
 
 module.exports = {
   index: () => {
@@ -31,6 +32,9 @@ module.exports = {
           break
         case TREATMENT_JUTSUS:
           index()
+          break
+        case TREATMENT_CHARACTERS:
+          treatment()
           break
       }
     })

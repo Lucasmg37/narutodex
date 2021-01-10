@@ -13,4 +13,9 @@ export const Container = styled.div`
   align-items: center;
   font-size: 2rem;
   margin-right: auto;
+
+  span {
+    font-weight: 300;
+    color: #df872d;
+  }
 `;

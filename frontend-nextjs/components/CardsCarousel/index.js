@@ -1,15 +1,17 @@
-import React, { useCallback } from 'react';
+import Description from 'components/Description';
+import React, { useEffect, useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
-import CardJutsu from '../CardJutsu';
 import { Container } from './styles';
 
-function CardsCarousel({ changeCurrent, current, jutsus, setShowStamps, showStamps }) {
-  const handleShowStamps = useCallback(() => {
-    setShowStamps(true);
-  }, [setShowStamps]);
+function CardsCarousel({ changeCurrent, current, jutsus }) {
+  const [showOne, setShowOne] = useState(false);
+
+  useEffect(() => {
+    setShowOne(false);
+  }, [current]);
 
   return (
-    <Container showStamps={showStamps}>
+    <Container>
       <button onClick={() => changeCurrent(current - 1)} type="button" className="previous">
         <FiChevronLeft />
       </button>
@@ -46,13 +48,15 @@ function CardsCarousel({ changeCurrent, current, jutsus, setShowStamps, showStam
             }
 
             return (
-              <CardJutsu
+              <Description
+                isInitialCard
+                current={current}
+                setShowOne={setShowOne}
+                showOne={showOne}
                 jutsu={{
                   ...jutsu,
                   position,
                 }}
-                handleShowStamps={handleShowStamps}
-                showOne={showStamps}
               />
             );
           }

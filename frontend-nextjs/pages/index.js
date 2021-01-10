@@ -1,16 +1,11 @@
 import React, { useCallback, useState } from 'react';
-import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { GiPerspectiveDiceSixFacesOne } from 'react-icons/gi';
-import { FiSearch } from 'react-icons/fi';
-import { FaGit, FaRandom } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from 'components/Header';
 import api from '../services/api';
 import CardStamps from '../components/CardStamps';
 import CardsCarousel from '../components/CardsCarousel';
 import { Container } from '../styles/Home';
-import Transition from '../components/Transition';
 
 export async function getStaticProps() {
   const { data } = await api.get('jutsu');
@@ -28,9 +23,6 @@ export default function Home({ jutsus }) {
   const [currentJutsu, setCurrentJutsu] = useState(jutsus[2]);
 
   const [showStamps, setShowStamps] = useState(false);
-  const [goToSearch, setGoToSearch] = useState(false);
-
-  const router = useRouter();
 
   const changeCurrent = useCallback(
     positon => {
@@ -41,10 +33,6 @@ export default function Home({ jutsus }) {
     [jutsus],
   );
 
-  const handleTransition = useCallback(() => {
-    router.push('/search', '/search');
-  }, [router]);
-
   return (
     <Container>
       <Head>
@@ -52,35 +40,6 @@ export default function Home({ jutsus }) {
       </Head>
 
       <img className="background" src={`http://localhost:3333/api/v1/jutsu/${currentJutsu.id}/image`} alt="" />
-
-      <aside>
-        <nav>
-          <ul>
-            <li>
-              <button onClick={() => setGoToSearch(true)} type="button">
-                <Transition execute={goToSearch} onAfter={handleTransition} />
-                <FiSearch /> <span>Pesquisar</span>
-              </button>
-            </li>
-            <li>
-              <button type="button">
-                <FaRandom /> <span>Misturar</span>
-              </button>
-            </li>
-
-            <li>
-              <button type="button">
-                <GiPerspectiveDiceSixFacesOne /> <span>Aleatório</span>
-              </button>
-            </li>
-            <li>
-              <button type="button">
-                <FaGit /> <span>Sobre</span>
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </aside>
 
       <main>
         <Header />

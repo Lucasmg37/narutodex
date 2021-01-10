@@ -27,7 +27,6 @@ export const Container = styled.form`
     cursor: pointer;
     background: #df872d;
     font-size: 24px;
-    /* font-weight: bold; */
     padding: auto 8px;
     display: flex;
     align-items: center;

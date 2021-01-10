@@ -4,10 +4,10 @@ import { steamingBowl } from '../Emoji/emojis';
 
 import { Container } from './styles';
 
-function Brand() {
+function Brand({ ...props }) {
   return (
-    <Container>
-      <Emoji emoji={steamingBowl} /> RAMEN JUTSUS
+    <Container {...props}>
+      <Emoji emoji={steamingBowl} /> NARUTO<span>DEX</span>
     </Container>
   );
 }

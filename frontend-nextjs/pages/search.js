@@ -26,6 +26,18 @@ export default function Search() {
 
   const router = useRouter();
 
+  const goToDescription = useCallback(
+    item => {
+      if (item.isJutsu) {
+        router.push(`/jutsus/${item.id}`);
+        return;
+      }
+
+      router.push(`/characters/${item.id}`);
+    },
+    [router],
+  );
+
   return (
     <Container>
       <Head>
@@ -56,7 +68,7 @@ export default function Search() {
         <ul>
           {result.map(item => {
             return (
-              <ItemResult onClick={() => router.push(`/jutsus/${item.id}`)} key={item.id}>
+              <ItemResult onClick={() => goToDescription(item)} key={item.id}>
                 <img src={item.image} alt={item.name} />
                 <div>
                   <h1>{item.name}</h1>

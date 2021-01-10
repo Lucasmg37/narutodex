@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { Container as Brand } from '../Brand/styles';
+import { Container as InputSearch } from '../InputSearch/styles';
 
 export const Container = styled.section`
   padding: 64px 64px 16px;
@@ -6,30 +8,36 @@ export const Container = styled.section`
   ul {
     list-style: none;
     display: flex;
+    align-items: center;
 
-    li:first-child {
+    ${Brand} {
+      cursor: pointer;
+    }
+
+    ${InputSearch} {
+      input {
+        padding: 8px 8px;
+      }
+    }
+
+    .separator {
       margin-right: auto;
     }
 
+    .navItemButton,
     .backButton {
       background: #df872d;
       color: #fff;
-      height: 64px;
       margin-right: 8px;
       border: none;
-      font-size: 24px;
+      font-size: 20px;
       border-radius: 32px;
-      padding: 0 24px;
+      padding: 8px 24px;
       display: flex;
       align-items: center;
       cursor: pointer;
       transition: all ease 0.2s;
       border: 3px solid transparent;
-
-      &:hover {
-        border: 3px solid #df872d;
-        background: none;
-      }
 
       svg {
         margin-right: 8px;
