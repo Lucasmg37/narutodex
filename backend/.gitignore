@@ -1,3 +1,4 @@
 node_modules/
 # database/database.sqlite
-public/images/
+public/images/characters/*jpg
+public/images/jutsus/*jpg
