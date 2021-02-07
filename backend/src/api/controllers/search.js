@@ -30,7 +30,7 @@ module.exports = {
 
       jutsus.forEach(jutsu => {
         const newJutsu = jutsu.toJSON()
-        const image = 'http://localhost:3333/api/v1/jutsu/' + newJutsu.id + '/image'
+        const image = 'https://narutodexapi.herokuapp.com/api/v1/jutsu/' + newJutsu.id + '/image'
         jutsusData.push({ ...newJutsu, image, isJutsu: true })
       })
 
@@ -38,7 +38,7 @@ module.exports = {
 
       characters.forEach(character => {
         character = character.toJSON()
-        const image = 'http://localhost:3333/api/v1/character/' + character.id + '/image'
+        const image = 'https://narutodexapi.herokuapp.com/api/v1/character/' + character.id + '/image'
         charactersData.push({ ...character, image })
       })
 
