@@ -16,6 +16,7 @@ export const Container = styled.div`
     max-width: 90vw;
     background: #222;
     border-radius: 40px;
+    margin-bottom: 24px;
 
     h1 {
       color: #df872d;
