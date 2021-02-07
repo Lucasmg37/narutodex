@@ -18,6 +18,10 @@ export const Container = styled.section`
       input {
         padding: 8px 8px;
       }
+
+      button {
+        font-size: 18px;
+      }
     }
 
     .separator {
@@ -29,7 +33,6 @@ export const Container = styled.section`
       background: #df872d;
       color: #fff;
       margin-right: 8px;
-      border: none;
       font-size: 20px;
       border-radius: 32px;
       padding: 8px 24px;
@@ -37,7 +40,12 @@ export const Container = styled.section`
       align-items: center;
       cursor: pointer;
       transition: all ease 0.2s;
-      border: 3px solid transparent;
+      border: 1px solid transparent;
+
+      :hover {
+        background: transparent;
+        border: 1px solid #df872d;
+      }
 
       svg {
         margin-right: 8px;
@@ -55,10 +63,12 @@ export const Container = styled.section`
         color: #fff;
       }
 
+      button.selected {
+        background: #df872d;
+      }
+
       button:first-child {
         border-radius: 24px 0 0 24px;
-
-        background: #df872d;
       }
 
       button:last-child {

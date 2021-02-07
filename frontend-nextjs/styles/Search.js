@@ -13,26 +13,23 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     flex: 1;
-    align-items: center;
 
     main {
       width: 800px;
-      margin: auto;
+      margin: 0 auto;
     }
 
     & > div {
       width: 800px;
-      margin: 40px auto;
+      margin: 80px auto;
 
       h1 {
-        max-width: 400px;
         color: #df872d;
         font-size: 64px;
         margin-bottom: 24px;
       }
 
       h2 {
-        max-width: 600px;
         color: #df872d;
         font-size: 32px;
         margin-bottom: 24px;

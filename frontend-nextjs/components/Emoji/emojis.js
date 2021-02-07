@@ -10,8 +10,18 @@ export const steamingBowl = {
   alt: 'Emoji. Tigela de Ramen.',
 };
 
+export const openBook = {
+  img: `${path}open-book_1f4d6.png`,
+  alt: 'Emoji. Livro aberto.',
+};
+
 export const magnifyingGlassTiltedLeft = {
   img: `${path}magnifying-glass-tilted-left_1f50d.png`,
+  alt: 'Emoji. Lupa na esquerda.',
+};
+
+export const disappointedFace = {
+  img: `${path}disappointed-face_1f61e.png`,
   alt: 'Emoji. Lupa na esquerda.',
 };
 

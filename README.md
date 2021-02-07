@@ -1,4 +1,4 @@
-# 🍜 Ramen Jutsus - Em desenvolvimento
+# 📖 NARUTODEX- Em desenvolvimento
 
 ## Uma plataforma para procurar dados de Jutsus e Personagens de Naruto
 
@@ -32,5 +32,5 @@ Todas as informações consumidas pertencem a [Naruto Wiki]('https://naruto.fand
 
 - [X] Criar tela de busca
 
-- [ ] Criar card de personagem
+- [X] Criar card de personagem
 ...

@@ -1,75 +1,94 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Head from 'next/head';
-import { motion, AnimatePresence } from 'framer-motion';
 import Header from 'components/Header';
 import api from '../services/api';
-import CardStamps from '../components/CardStamps';
 import CardsCarousel from '../components/CardsCarousel';
 import { Container } from '../styles/Home';
 
 export async function getStaticProps() {
   const { data } = await api.get('jutsu');
+  const { data: dataCharacters } = await api.get('character');
 
   const { data: jutsus } = data;
+  const { data: characters } = dataCharacters;
   return {
     props: {
       jutsus,
+      characters,
     },
   };
 }
 
-export default function Home({ jutsus }) {
-  const [current, setCurrent] = useState(2);
-  const [currentJutsu, setCurrentJutsu] = useState(jutsus[2]);
+export default function Home({ jutsus, characters }) {
+  const [current, setCurrent] = useState(0);
+  const [currentJutsu, setCurrentJutsu] = useState(jutsus[0]);
+  const [typeData, setTypeData] = useState('JUTSU');
+  const [data, setData] = useState(jutsus);
 
   const [showStamps, setShowStamps] = useState(false);
 
+  useEffect(() => {
+    setCurrent(0);
+    setShowStamps(false);
+
+    if (typeData === 'JUTSU') {
+      setData(jutsus);
+      setCurrentJutsu(jutsus[0]);
+      return;
+    }
+
+    setCurrentJutsu(characters[0]);
+    setData(characters);
+  }, [characters, jutsus, typeData]);
+
   const changeCurrent = useCallback(
     positon => {
+      if (positon < 0) {
+        setCurrent(data.length - 1);
+        setCurrentJutsu(data[data.length - 1]);
+        setShowStamps(false);
+        return;
+      }
+
+      if (positon >= data.length) {
+        setCurrent(0);
+        setCurrentJutsu(data[0]);
+        setShowStamps(false);
+        return;
+      }
+
       setCurrent(positon);
-      setCurrentJutsu(jutsus[positon]);
+      setCurrentJutsu(data[positon]);
       setShowStamps(false);
     },
-    [jutsus],
+    [data],
   );
 
   return (
     <Container>
       <Head>
-        <title>Ramen Jutsus</title>
+        <title>NARUTODEX</title>
       </Head>
 
-      <img className="background" src={`http://localhost:3333/api/v1/jutsu/${currentJutsu.id}/image`} alt="" />
+      <img className="background" src={`${process.env.api}jutsu/${currentJutsu.id}/image`} alt="" />
 
       <main>
-        <Header />
+        <Header
+          switcher={{
+            selected: typeData,
+            onChange: type => setTypeData(type),
+          }}
+        />
 
         <article>
           <CardsCarousel
             setShowStamps={setShowStamps}
             showStamps={showStamps}
-            jutsus={jutsus}
+            data={data}
             changeCurrent={changeCurrent}
             current={current}
+            isJutsu={typeData === 'JUTSU'}
           />
-
-          <AnimatePresence>
-            {!!showStamps && (
-              <motion.section
-                initial={{ marginRight: -360, opacity: 0 }}
-                animate={{ marginRight: 0, opacity: 1 }}
-                exit={{ marginRight: -380, opacity: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                {!!currentJutsu.groupjutsusstamp.length && (
-                  <CardStamps
-                    onCloseStamps={() => setShowStamps(false)}
-                    groupJutsusStamp={currentJutsu.groupjutsusstamp}
-                  />
-                )}
-              </motion.section>
-            )}
-          </AnimatePresence>
         </article>
       </main>
     </Container>

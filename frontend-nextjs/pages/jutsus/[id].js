@@ -11,14 +11,14 @@ function jutsus({ jutsu }) {
   return (
     <Container>
       <Head>
-        <title>Jutsu - {jutsu.name}</title>
+        <title>Jutsu | {jutsu.name}</title>
       </Head>
 
-      <img className="background" src={`http://localhost:3333/api/v1/jutsu/${jutsu.id}/image`} alt="" />
+      <img className="background" src={`${process.env.api}jutsu/${jutsu.id}/image`} alt="" />
 
       <Header showSwitch={false} />
 
-      <Description jutsu={jutsu} />
+      <Description data={jutsu} />
     </Container>
   );
 }

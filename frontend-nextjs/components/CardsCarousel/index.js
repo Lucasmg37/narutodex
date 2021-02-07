@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { Container } from './styles';
 
-function CardsCarousel({ changeCurrent, current, jutsus }) {
+function CardsCarousel({ changeCurrent, current, data, isJutsu }) {
   const [showOne, setShowOne] = useState(false);
 
   useEffect(() => {
@@ -16,8 +16,49 @@ function CardsCarousel({ changeCurrent, current, jutsus }) {
         <FiChevronLeft />
       </button>
 
-      {jutsus &&
-        jutsus.map((jutsu, index) => {
+      {data && current === 0 && (
+        <>
+          <Description
+            isInitialCard
+            current={current}
+            setShowOne={setShowOne}
+            showOne={showOne}
+            isJutsu={isJutsu}
+            data={{
+              ...data[data.length - 2],
+              position: -2,
+            }}
+          />
+          <Description
+            isInitialCard
+            current={current}
+            setShowOne={setShowOne}
+            showOne={showOne}
+            isJutsu={isJutsu}
+            data={{
+              ...data[data.length - 1],
+              position: -1,
+            }}
+          />
+        </>
+      )}
+
+      {data && current === 1 && (
+        <Description
+          isInitialCard
+          current={current}
+          setShowOne={setShowOne}
+          showOne={showOne}
+          isJutsu={isJutsu}
+          data={{
+            ...data[data.length - 1],
+            position: -2,
+          }}
+        />
+      )}
+
+      {data &&
+        data.map((item, index) => {
           if (
             index === current ||
             index === current - 1 ||
@@ -53,8 +94,9 @@ function CardsCarousel({ changeCurrent, current, jutsus }) {
                 current={current}
                 setShowOne={setShowOne}
                 showOne={showOne}
-                jutsu={{
-                  ...jutsu,
+                isJutsu={isJutsu}
+                data={{
+                  ...item,
                   position,
                 }}
               />
@@ -62,6 +104,47 @@ function CardsCarousel({ changeCurrent, current, jutsus }) {
           }
           return null;
         })}
+
+      {data && current === data.length - 1 && (
+        <>
+          <Description
+            isInitialCard
+            current={current}
+            setShowOne={setShowOne}
+            showOne={showOne}
+            isJutsu={isJutsu}
+            data={{
+              ...data[0],
+              position: 1,
+            }}
+          />
+          <Description
+            isInitialCard
+            current={current}
+            setShowOne={setShowOne}
+            showOne={showOne}
+            isJutsu={isJutsu}
+            data={{
+              ...data[1],
+              position: 2,
+            }}
+          />
+        </>
+      )}
+
+      {data && current === data.length - 2 && (
+        <Description
+          isInitialCard
+          current={current}
+          setShowOne={setShowOne}
+          showOne={showOne}
+          isJutsu={isJutsu}
+          data={{
+            ...data[0],
+            position: 2,
+          }}
+        />
+      )}
 
       <button type="button" onClick={() => changeCurrent(current + 1)} className="next">
         <FiChevronRight />

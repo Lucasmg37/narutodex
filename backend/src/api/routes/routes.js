@@ -12,24 +12,28 @@ const characterController = require('../controllers/character')
 const searchController = require('../controllers/search')
 const testController = require('../controllers/test')
 
+const apiVersion = '/api/v1/'
+
 const routes = express.Router()
-routes.get('/api/v1/fandom/character', fandomCharacterController)
-routes.get('/api/v1/fandom/character/description', fandomCharacterDescriptionController)
-routes.get('/api/v1/fandom/character/jutsus', fandomCharacterJutsuController)
-routes.get('/api/v1/fandom/jutsu', fandomJutsuController)
+routes.get(apiVersion + 'fandom/character', fandomCharacterController)
+routes.get(apiVersion + 'fandom/character/description', fandomCharacterDescriptionController)
+routes.get(apiVersion + 'fandom/character/jutsus', fandomCharacterJutsuController)
+routes.get(apiVersion + 'fandom/jutsu', fandomJutsuController)
 
-routes.get('/api/v1/process/jutsu/classification', proccessDataHandstampController.processClassification)
-routes.get('/api/v1/process/jutsu/class', proccessDataHandstampController.processClass)
-routes.get('/api/v1/process/jutsu/elements', proccessDataHandstampController.processElement)
+routes.get(apiVersion + 'process/jutsu/classification', proccessDataHandstampController.processClassification)
+routes.get(apiVersion + 'process/jutsu/class', proccessDataHandstampController.processClass)
+routes.get(apiVersion + 'process/jutsu/elements', proccessDataHandstampController.processElement)
 
-routes.get('/api/v1/jutsu', jutsuController.index)
-routes.get('/api/v1/jutsu/:id', jutsuController.getOne)
-routes.get('/api/v1/search', searchController.index)
-routes.get('/api/v1/jutsu/:id/image', jutsuController.image)
+routes.get(apiVersion + 'jutsu', jutsuController.index)
+routes.get(apiVersion + 'jutsu/random', jutsuController.getRandom)
+routes.get(apiVersion + 'jutsu/:id', jutsuController.getOne)
+routes.get(apiVersion + 'search', searchController.index)
+routes.get(apiVersion + 'jutsu/:id/image', jutsuController.image)
 
-routes.get('/api/v1/character/:id/image', characterController.image)
-routes.get('/api/v1/character/:id', characterController.getOne)
-routes.get('/api/v1/character', characterController.index)
+routes.get(apiVersion + 'character/random', characterController.getRandom)
+routes.get(apiVersion + 'character/:id/image', characterController.image)
+routes.get(apiVersion + 'character/:id', characterController.getOne)
+routes.get(apiVersion + 'character', characterController.index)
 
 routes.get('/test', testController.index)
 

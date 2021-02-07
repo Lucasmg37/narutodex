@@ -11,14 +11,14 @@ function characters({ character }) {
   return (
     <Container>
       <Head>
-        <title>Personagem - {character.name}</title>
+        <title>Personagem | {character.name}</title>
       </Head>
 
-      <img className="background" src={`http://localhost:3333/api/v1/character/${character.id}/image`} alt="" />
+      <img className="background" src={`${process.env.api}character/${character.id}/image`} alt="" />
 
       <Header showSwitch={false} />
 
-      <Description character={character} isJutsu={false} />
+      <Description data={character} isJutsu={false} />
     </Container>
   );
 }

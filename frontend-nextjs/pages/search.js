@@ -5,6 +5,7 @@ import Header from 'components/Header';
 import InputSearch from 'components/InputSearch';
 
 import { useRouter } from 'next/router';
+import Loading from 'components/Loading';
 import Emoji from '../components/Emoji';
 
 import { Container, ItemResult } from '../styles/Search';
@@ -14,14 +15,24 @@ import api from '../services/api';
 
 export default function Search() {
   const [search, setSearch] = useState('');
-
+  const [loading, setLoading] = useState(false);
+  const [hasResponse, setHasResponse] = useState(false);
   const [result, setResult] = useState([]);
 
   const handleSearch = useCallback(async (e, searchValue) => {
     e.preventDefault();
     setSearch(searchValue);
-    const { data } = await api.get('search', { params: { q: searchValue } });
-    setResult(data.data);
+    try {
+      setLoading(true);
+      const { data } = await api.get('search', { params: { q: searchValue } });
+      setResult(data.data);
+      setHasResponse(true);
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log('Ops Deu Ruim!');
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   const router = useRouter();
@@ -41,28 +52,36 @@ export default function Search() {
   return (
     <Container>
       <Head>
-        <title>Pesquisa - Ramen Jutsus</title>
+        <title>Pesquisar | NARUTODEX</title>
       </Head>
+
+      {loading && <Loading />}
 
       <Header
         showSwitch={false}
         showSearch={!!search}
-        showGoBack
         searchOptions={{ defaultSearch: search, onSubmit: handleSearch }}
       />
 
       <section>
         {!search && (
-          <main>
-            <InputSearch onSubmit={handleSearch} />
-          </main>
-        )}
-
-        {!search && (
           <div>
             <h1>Qual Jutsu você quer Dominar?</h1>
             <h2>Use a busca para procurar personagens e habilidades de Naruto, Naruto Shippunden e Boruto.</h2>
           </div>
+        )}
+
+        {search && hasResponse && !result.length && (
+          <div>
+            <h1>Opa! Não encontramos nada.</h1>
+            <h2>Confira o texto que está buscando.</h2>
+          </div>
+        )}
+
+        {!search && (
+          <main>
+            <InputSearch onSubmit={handleSearch} />
+          </main>
         )}
 
         <ul>

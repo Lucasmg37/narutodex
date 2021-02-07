@@ -6,15 +6,7 @@ import { classesToString, classificationsToString } from 'utils/jutsu';
 
 import { Container, LiNav } from './styles';
 
-function Description({
-  jutsu,
-  isInitialCard = false,
-  current = 0,
-  showOne = false,
-  setShowOne,
-  character,
-  isJutsu = true,
-}) {
+function Description({ isInitialCard = false, current = 0, showOne = false, setShowOne, isJutsu = true, data = {} }) {
   const [active, setActive] = useState(1);
 
   const [isClose, setClose] = useState(isInitialCard);
@@ -35,18 +27,15 @@ function Description({
   const router = useRouter();
 
   return (
-    <Container position={isJutsu ? jutsu.position : character.position} showOne={showOne}>
+    <Container position={data.position} showOne={showOne}>
       <aside onClick={handleClickCard}>
-        <img
-          src={`http://localhost:3333/api/v1/${isJutsu ? 'jutsu' : 'character'}/${
-            isJutsu ? jutsu.id : character.id
-          }/image`}
-          alt=""
-        />
+        <img src={`${process.env.api}${isJutsu ? 'jutsu' : 'character'}/${data.id}/image`} alt="" />
         <div>
-          <h1>{isJutsu ? jutsu.name : character.name}</h1>
+          <h1>{data.name}</h1>
           <div className="icons">
-            {isJutsu && !!jutsu.groupjutsusstamp.length && <Emoji emoji={handWithFingersSplayed} />}
+            {isJutsu && data.groupjutsusstamp && !!data.groupjutsusstamp.length && (
+              <Emoji emoji={handWithFingersSplayed} />
+            )}
           </div>
         </div>
       </aside>
@@ -58,7 +47,7 @@ function Description({
               <LiNav isActive={active === 1} onClick={() => setActive(1)}>
                 Informações
               </LiNav>
-              {isJutsu && !!jutsu.groupjutsusstamp.length && (
+              {isJutsu && data.groupjutsusstamp && !!data.groupjutsusstamp.length && (
                 <LiNav isActive={active === 2} onClick={() => setActive(2)}>
                   Selos
                 </LiNav>
@@ -70,7 +59,7 @@ function Description({
                 </LiNav>
               )}
 
-              {!isJutsu && (
+              {!isJutsu && data.jutsus && !!data.jutsus.length && (
                 <LiNav isActive={active === 4} onClick={() => setActive(4)}>
                   Jutsus
                 </LiNav>
@@ -81,31 +70,31 @@ function Description({
           <section>
             {active === 1 && (
               <div>
-                <h3>{isJutsu ? jutsu.name : character.name}</h3>
+                <h3>{data.name}</h3>
                 <div>
                   {isJutsu && (
                     <>
                       <div className="tagDotted">
                         <div>
                           <span>Rank</span>
-                          {jutsu.rank || '-'}
+                          {data.rank || '-'}
                         </div>
 
                         <div>
                           <span>Alcance</span>
-                          {jutsu.reach || '-'}
+                          {data.reach || '-'}
                         </div>
                       </div>
 
                       <div className="tagDotted">
                         <div>
                           <span>Classe</span>
-                          {classesToString(jutsu.classes)}
+                          {classesToString(data.classes)}
                         </div>
 
                         <div>
                           <span>Classificação</span>
-                          {classificationsToString(jutsu.classifications)}
+                          {classificationsToString(data.classifications)}
                         </div>
                       </div>
                     </>
@@ -114,7 +103,7 @@ function Description({
                   <h3>Descrição</h3>
 
                   <div className="description">
-                    <p>{isJutsu ? jutsu.description : character.description}</p>
+                    <p>{data.description}</p>
                   </div>
                 </div>
               </div>
@@ -123,12 +112,12 @@ function Description({
             {active === 2 && (
               <div className="list">
                 <ul>
-                  {jutsu.groupjutsusstamp &&
-                    !!jutsu.groupjutsusstamp.length &&
-                    jutsu.groupjutsusstamp[0].stamps.map(item => {
+                  {data.groupjutsusstamp &&
+                    !!data.groupjutsusstamp.length &&
+                    data.groupjutsusstamp[0].stamps.map(item => {
                       return (
                         <li>
-                          {!!item.image && <img src={`http://localhost:3333${item.image}`} alt={item.name} />}
+                          {!!item.image && <img src={`${process.env.apiBase}${item.image}`} alt={item.name} />}
                           {item.name}
                         </li>
                       );
@@ -140,12 +129,12 @@ function Description({
             {active === 3 && (
               <div className="list">
                 <ul>
-                  {jutsu.characters &&
-                    !!jutsu.characters.length &&
-                    jutsu.characters.map(item => {
+                  {data.characters &&
+                    !!data.characters.length &&
+                    data.characters.map(item => {
                       return (
                         <li onClick={() => router.push(`/characters/${item.id}`)}>
-                          <img src={`http://localhost:3333/api/v1/character/${item.id}/image`} alt={item.name} />
+                          <img src={`${process.env.api}character/${item.id}/image`} alt={item.name} />
                           {item.name}
                         </li>
                       );
@@ -157,12 +146,12 @@ function Description({
             {active === 4 && (
               <div className="list">
                 <ul>
-                  {character.jutsus &&
-                    !!character.jutsus.length &&
-                    character.jutsus.map(item => {
+                  {data.jutsus &&
+                    !!data.jutsus.length &&
+                    data.jutsus.map(item => {
                       return (
                         <li onClick={() => router.push(`/jutsus/${item.id}`)}>
-                          <img src={`http://localhost:3333/api/v1/jutsu/${item.id}/image`} alt={item.name} />
+                          <img src={`${process.env.api}jutsu/${item.id}/image`} alt={item.name} />
                           {item.name}
                         </li>
                       );

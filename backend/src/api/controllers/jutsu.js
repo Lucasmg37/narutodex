@@ -1,4 +1,4 @@
-const { Jutsu, GroupJutsusStamp, Stamp, Classification, Class, Element, Character } = require('../../models')
+const { Jutsu, GroupJutsusStamp, Stamp, Classification, Class, Element, Character, sequelize } = require('../../models')
 const fs = require('fs')
 const fetch = require('node-fetch')
 
@@ -38,6 +38,51 @@ module.exports = {
       res.send({
         status: true,
         message: 'Jutsus retornados com sucesso.',
+        data: jutsus
+      }).status(200)
+    } catch (err) {
+      console.error(err)
+      res.send({
+        status: true,
+        message: 'Erro!',
+        data: {}
+      }).status(500)
+    }
+  },
+
+  getRandom: async (req, res) => {
+    try {
+      const jutsus = await Jutsu.findOne({
+        order: sequelize.random(),
+        include:
+        [
+          {
+            model: GroupJutsusStamp,
+            as: 'groupjutsusstamp',
+            include: [{ model: Stamp, as: 'stamps' }]
+          },
+          {
+            model: Character,
+            as: 'characters'
+          },
+          {
+            model: Classification,
+            as: 'classifications'
+          },
+          {
+            model: Class,
+            as: 'classes'
+          },
+          {
+            model: Element,
+            as: 'elements'
+          }
+        ]
+      })
+
+      res.send({
+        status: true,
+        message: 'Jutsu aleatório retornado com sucesso.',
         data: jutsus
       }).status(200)
     } catch (err) {
