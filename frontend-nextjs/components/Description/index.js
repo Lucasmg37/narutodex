@@ -117,7 +117,7 @@ function Description({ isInitialCard = false, current = 0, showOne = false, setS
                     data.groupjutsusstamp[0].stamps.map(item => {
                       return (
                         <li>
-                          {!!item.image && <img src={`${process.env.apiBase}${item.image}`} alt={item.name} />}
+                          {!!item.image && <img src={`${process.env.apiBase}${item.image}`} alt="" />}
                           {item.name}
                         </li>
                       );
@@ -134,7 +134,7 @@ function Description({ isInitialCard = false, current = 0, showOne = false, setS
                     data.characters.map(item => {
                       return (
                         <li onClick={() => router.push(`/characters/${item.id}`)}>
-                          <img src={`${process.env.api}character/${item.id}/image`} alt={item.name} />
+                          <img src={`${process.env.api}character/${item.id}/image`} alt="" />
                           {item.name}
                         </li>
                       );
@@ -151,7 +151,7 @@ function Description({ isInitialCard = false, current = 0, showOne = false, setS
                     data.jutsus.map(item => {
                       return (
                         <li onClick={() => router.push(`/jutsus/${item.id}`)}>
-                          <img src={`${process.env.api}jutsu/${item.id}/image`} alt={item.name} />
+                          <img src={`${process.env.api}jutsu/${item.id}/image`} alt="" />
                           {item.name}
                         </li>
                       );
