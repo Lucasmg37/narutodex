@@ -30,6 +30,7 @@ export async function getStaticPaths() {
     const obj = {
       params: {
         id: `${item.id}`,
+        item,
       },
     };
 
@@ -43,9 +44,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const { data } = await api.get(`jutsu/${params.id}`);
+  // const { data } = await api.get(`jutsu/${params.id}`);
 
-  const { data: jutsu } = data;
+  const { item: jutsu } = params;
 
   return {
     props: {
