@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import api from 'services/api';
 
 import Description from 'components/Description';
@@ -7,7 +7,18 @@ import { Container } from '../../styles/Description';
 
 import Header from '../../components/Header';
 
-function characters({ character }) {
+function characters({ id }) {
+  const [character, setCharacter] = useState({});
+
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await api.get(`character/${id}`);
+      setCharacter(data.data);
+    };
+
+    getData();
+  }, [id]);
+
   return (
     <Container>
       <Head>
@@ -44,13 +55,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  // const { data } = await api.get(`character/${params.id}`);
-
-  const { item: character } = params;
-
   return {
     props: {
-      character,
+      id: params.id,
     },
   };
 }
