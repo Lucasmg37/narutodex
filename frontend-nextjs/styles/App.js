@@ -3,7 +3,7 @@ import { mixins } from './responsive';
 
 export const Container = styled.div`
   display: flex;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   overflow: hidden;
   display: flex;

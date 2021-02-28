@@ -1,8 +1,6 @@
 import styled, { css } from 'styled-components';
 import { mixins } from 'styles/responsive';
 
-import { motion } from 'framer-motion';
-
 import { Container as Emoji } from '../Emoji/styles';
 
 export const LiNav = styled.li`
@@ -32,7 +30,7 @@ export const LiNav = styled.li`
   }
 `;
 
-export const Container = styled(motion.div)`
+export const Container = styled.div`
   margin: auto;
   display: flex;
   height: 100%;
