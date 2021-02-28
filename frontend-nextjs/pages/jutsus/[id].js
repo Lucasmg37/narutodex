@@ -29,7 +29,7 @@ function jutsus({ id }) {
 
       <Header showSwitch={false} />
 
-      <Description data={jutsu} />
+      <Description data={jutsu} showOne />
     </Container>
   );
 }

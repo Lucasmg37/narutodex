@@ -41,88 +41,87 @@ export const Container = styled.div`
   transition: all ease 0.5s;
   flex-direction: column;
 
-  ${mixins.sm(css`
-    height: 600px;
-    flex-direction: row;
-    width: auto;
-    overflow: hidden;
-    border-radius: 16px;
-  `)}
-
-  ${({ position }) =>
-    position &&
-    (position === 1 || position === -1) &&
-    css`
-      z-index: 3;
-      ${mixins.sm(css`
-        transform: scale(0.9);
-      `)}
-    `};
-
-  ${({ position }) =>
-    position &&
-    (position === 2 || position === -2) &&
-    css`
-      z-index: 2;
-
-      ${mixins.sm(css`
-        opacity: 0.5;
-        transform: scale(0.7);
-      `)}
-    `};
-
-  ${({ position }) =>
-    position &&
-    position === -1 &&
-    css`
-      margin-right: -280px;
-    `};
-
-  ${({ position }) =>
-    position &&
-    position === 1 &&
-    css`
-      margin-left: -280px;
-    `};
-
-  ${({ position }) =>
-    position &&
-    position === -2 &&
-    css`
-      margin-right: -257px;
-    `};
-
-  ${({ position }) =>
-    position &&
-    position === 2 &&
-    css`
-      margin-left: -275px;
-    `};
-
-  ${({ showOne, position }) =>
-    showOne &&
-    position < 0 &&
-    css`
-      opacity: 0;
-      margin-right: -360px;
-    `};
-
-  ${({ showOne, position }) =>
-    showOne &&
-    position > 0 &&
-    css`
-      margin-left: -360px;
-      opacity: 0;
-    `};
-
   position: absolute;
   top: 0;
   left: 0;
   margin: 0;
 
   ${mixins.sm(css`
+    height: 600px;
+    flex-direction: row;
+    width: auto;
+    overflow: hidden;
+    border-radius: 16px;
     position: static;
-    margin: auto;
+
+    ${({ showOne }) =>
+      showOne &&
+      css`
+        margin: auto;
+        top: auto;
+        left: auto;
+      `};
+
+    ${({ position }) =>
+      position &&
+      (position === 1 || position === -1) &&
+      css`
+        z-index: 3;
+        transform: scale(0.9);
+      `};
+
+    ${({ position }) =>
+      position &&
+      (position === 2 || position === -2) &&
+      css`
+        z-index: 2;
+        opacity: 0.5;
+        transform: scale(0.7);
+      `};
+
+    ${({ position }) =>
+      position &&
+      position === -1 &&
+      css`
+        margin-right: -280px;
+      `};
+
+    ${({ position }) =>
+      position &&
+      position === 1 &&
+      css`
+        margin-left: -280px;
+      `};
+
+    ${({ position }) =>
+      position &&
+      position === -2 &&
+      css`
+        margin-right: -257px;
+      `};
+
+    ${({ position }) =>
+      position &&
+      position === 2 &&
+      css`
+        margin-left: -275px;
+      `};
+
+    ${({ showOne, position }) =>
+      showOne &&
+      position < 0 &&
+      css`
+        opacity: 0;
+        margin-right: -450px;
+      `};
+
+    ${({ showOne, position }) =>
+      showOne &&
+      position > 0 &&
+      css`
+        margin-left: -450px;
+        opacity: 0;
+      `};
   `)}
 
   main {

@@ -7,16 +7,7 @@ import { useWindowSize } from '../../hooks';
 
 import { Container, LiNav } from './styles';
 
-function Description({
-  isInitialCard = false,
-  current = 0,
-  showOne = false,
-  setShowOne,
-  isJutsu = true,
-  data = {},
-  onNext,
-  isDrag = false,
-}) {
+function Description({ isInitialCard = false, current = 0, showOne = false, setShowOne, isJutsu = true, data = {} }) {
   const [active, setActive] = useState(1);
 
   const [isClose, setClose] = useState(isInitialCard);
@@ -38,22 +29,8 @@ function Description({
 
   const [widht] = useWindowSize();
 
-  const handleOnNext = useCallback(
-    x => {
-      onNext(x < 0);
-    },
-    [onNext],
-  );
-
   return (
-    <Container
-      drag={isDrag ? 'X' : false}
-      dragConstraints={{ left: 0, right: 0 }}
-      onDragEnd={(event, info) => handleOnNext(info.point.x)}
-      dragElastic={0.2}
-      position={data.position}
-      showOne={showOne}
-    >
+    <Container position={data.position} showOne={showOne}>
       <aside onClick={handleClickCard}>
         <img src={`${process.env.api}${isJutsu ? 'jutsu' : 'character'}/${data.id}/image`} alt="" />
         <div>

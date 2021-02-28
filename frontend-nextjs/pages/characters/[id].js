@@ -29,7 +29,7 @@ function characters({ id }) {
 
       <Header showSwitch={false} />
 
-      <Description data={character} isJutsu={false} />
+      <Description data={character} showOne isJutsu={false} />
     </Container>
   );
 }
