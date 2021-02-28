@@ -7,10 +7,40 @@ export const Container = styled.section`
   height: 100%;
   width: 100%;
 
+  .topMobile {
+    position: absolute;
+    z-index: 5;
+    top: 24px;
+    right: 24px;
+    display: flex;
+
+    button {
+      border: none;
+      background: #222;
+      color: #df872d;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-size: 32px;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      opacity: 0.7;
+
+      + button {
+        margin-left: 8px;
+      }
+    }
+  }
+
   ${mixins.sm(css`
     position: static;
     align-items: center;
     justify-content: center;
+
+    .topMobile {
+      display: none;
+    }
   `)}
 
   ${({ showStamps }) =>

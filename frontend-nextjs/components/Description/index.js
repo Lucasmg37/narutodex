@@ -2,6 +2,7 @@ import Emoji from 'components/Emoji';
 import { handWithFingersSplayed } from 'components/Emoji/emojis';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
+import { FiChevronUp } from 'react-icons/fi';
 import { classesToString, classificationsToString } from 'utils/jutsu';
 import { useWindowSize } from '../../hooks';
 

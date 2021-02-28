@@ -12,7 +12,7 @@ export const Container = styled.div`
     min-height: 100vh;
   `)}
 
-  main {
+  > main {
     display: flex;
     flex-direction: column;
     flex: 1;

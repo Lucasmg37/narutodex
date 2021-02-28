@@ -23,6 +23,16 @@ function CardsCarousel({ changeCurrent, current, data, isJutsu }) {
 
   return (
     <Container>
+      <div className="topMobile">
+        <button onClick={() => changeCurrent(current - 1)} type="button">
+          <FiChevronLeft />
+        </button>
+
+        <button type="button" onClick={() => changeCurrent(current + 1)}>
+          <FiChevronRight />
+        </button>
+      </div>
+
       <button onClick={() => changeCurrent(current - 1)} type="button" className="previous">
         <FiChevronLeft />
       </button>
@@ -31,6 +41,7 @@ function CardsCarousel({ changeCurrent, current, data, isJutsu }) {
         <>
           <Description
             isInitialCard
+            hideData
             current={current}
             setShowOne={setShowOne}
             showOne={showOne}
@@ -42,6 +53,7 @@ function CardsCarousel({ changeCurrent, current, data, isJutsu }) {
           />
           <Description
             isInitialCard
+            hideData
             current={current}
             setShowOne={setShowOne}
             showOne={showOne}
@@ -57,6 +69,7 @@ function CardsCarousel({ changeCurrent, current, data, isJutsu }) {
       {data && current === 1 && (
         <Description
           isInitialCard
+          hideData
           current={current}
           setShowOne={setShowOne}
           showOne={showOne}
@@ -102,6 +115,7 @@ function CardsCarousel({ changeCurrent, current, data, isJutsu }) {
             return (
               <Description
                 isInitialCard
+                hideData
                 current={current}
                 setShowOne={setShowOne}
                 showOne={showOne}
@@ -122,6 +136,7 @@ function CardsCarousel({ changeCurrent, current, data, isJutsu }) {
         <>
           <Description
             isInitialCard
+            hideData
             current={current}
             setShowOne={setShowOne}
             showOne={showOne}
@@ -133,6 +148,7 @@ function CardsCarousel({ changeCurrent, current, data, isJutsu }) {
           />
           <Description
             isInitialCard
+            hideData
             current={current}
             setShowOne={setShowOne}
             showOne={showOne}
@@ -148,6 +164,7 @@ function CardsCarousel({ changeCurrent, current, data, isJutsu }) {
       {data && current === data.length - 2 && (
         <Description
           isInitialCard
+          hideData
           current={current}
           setShowOne={setShowOne}
           showOne={showOne}

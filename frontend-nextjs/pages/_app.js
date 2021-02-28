@@ -14,6 +14,9 @@ function MyApp({ Component, pageProps }) {
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
         />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#df872d" />
       </Head>
       <Container>
         <Component {...pageProps} />

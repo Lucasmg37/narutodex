@@ -46,6 +46,13 @@ export const Container = styled.div`
   left: 0;
   margin: 0;
 
+  ${({ position }) =>
+    position &&
+    position !== 0 &&
+    css`
+      display: none;
+    `};
+
   ${mixins.sm(css`
     height: 600px;
     flex-direction: row;
@@ -53,6 +60,7 @@ export const Container = styled.div`
     overflow: hidden;
     border-radius: 16px;
     position: static;
+    display: flex;
 
     ${({ showOne }) =>
       showOne &&
@@ -128,10 +136,17 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    background: #111;
+
+    &::before {
+      content: '';
+      height: 60vh;
+
+      ${mixins.sm(css`
+        height: 0vh;
+      `)}
+    }
 
     position: relative;
-    top: 60vh;
     z-index: 2;
 
     ${mixins.sm(css`
@@ -142,6 +157,12 @@ export const Container = styled.div`
     `)}
 
     nav {
+      background: #111;
+
+      ${mixins.sm(css`
+        background: transparent;
+      `)}
+
       ul {
         display: flex;
         list-style: none;
@@ -154,6 +175,11 @@ export const Container = styled.div`
       overflow: hidden;
       /* flex: 1; */
       color: #eee;
+      background: #111;
+
+      ${mixins.sm(css`
+        background: transparent;
+      `)}
 
       ${mixins.sm(css`
         color: #000;
