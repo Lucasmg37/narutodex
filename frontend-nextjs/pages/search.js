@@ -22,6 +22,12 @@ export default function Search() {
   const handleSearch = useCallback(async (e, searchValue) => {
     e.preventDefault();
     setSearch(searchValue);
+
+    if (!searchValue) {
+      setResult([]);
+      return;
+    }
+
     try {
       setLoading(true);
       const { data } = await api.get('search', { params: { q: searchValue } });
@@ -50,7 +56,7 @@ export default function Search() {
   );
 
   return (
-    <Container>
+    <Container showInput={!search}>
       <Head>
         <title>Pesquisar | NARUTODEX</title>
       </Head>
@@ -78,11 +84,9 @@ export default function Search() {
           </div>
         )}
 
-        {!search && (
-          <main>
-            <InputSearch onSubmit={handleSearch} />
-          </main>
-        )}
+        <main>
+          <InputSearch onSubmit={handleSearch} />
+        </main>
 
         <ul>
           {result.map(item => {

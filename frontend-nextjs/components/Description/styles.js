@@ -1,4 +1,7 @@
 import styled, { css } from 'styled-components';
+import { mixins } from 'styles/responsive';
+
+import { motion } from 'framer-motion';
 
 import { Container as Emoji } from '../Emoji/styles';
 
@@ -7,43 +10,67 @@ export const LiNav = styled.li`
   align-items: center;
   text-align: center;
   font-size: 24px;
-  padding: 16px;
+  padding: 16px 0;
   color: #fff;
   cursor: pointer;
   transition: ease 0.2s all;
-  border-radius: 50px;
-  margin: 8px;
-  background: ${({ isActive }) => (isActive ? '#222' : '#111')};
+  border-radius: 0px;
+  margin: 0px;
+
+  font-weight: bold;
+
+  border-bottom: 2px solid ${({ isActive }) => (isActive ? '#df872d' : '#222')};
+
+  ${mixins.sm(css`
+    margin: 8px;
+    border-radius: 50px;
+    background: ${({ isActive }) => (isActive ? '#222' : '#111')};
+  `)}
 
   &:hover {
     background: #222;
   }
 `;
 
-export const Container = styled.div`
+export const Container = styled(motion.div)`
   margin: auto;
   display: flex;
-  height: 600px;
-  border-radius: 16px;
-  overflow: hidden;
+  height: 100%;
+  border-radius: 0px;
+  width: 100%;
+  overflow: auto;
   z-index: 4;
   transition: all ease 0.5s;
+  flex-direction: column;
+
+  ${mixins.sm(css`
+    height: 600px;
+    flex-direction: row;
+    width: auto;
+    overflow: hidden;
+    border-radius: 16px;
+  `)}
 
   ${({ position }) =>
     position &&
     (position === 1 || position === -1) &&
     css`
-      transform: scale(0.9);
       z-index: 3;
+      ${mixins.sm(css`
+        transform: scale(0.9);
+      `)}
     `};
 
   ${({ position }) =>
     position &&
     (position === 2 || position === -2) &&
     css`
-      opacity: 0.5;
-      transform: scale(0.7);
       z-index: 2;
+
+      ${mixins.sm(css`
+        opacity: 0.5;
+        transform: scale(0.7);
+      `)}
     `};
 
   ${({ position }) =>
@@ -90,11 +117,32 @@ export const Container = styled.div`
       opacity: 0;
     `};
 
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+
+  ${mixins.sm(css`
+    position: static;
+    margin: auto;
+  `)}
+
   main {
     display: flex;
     flex-direction: column;
-    width: 800px;
-    background: #df872d;
+    width: 100%;
+    background: #111;
+
+    position: relative;
+    top: 60vh;
+    z-index: 2;
+
+    ${mixins.sm(css`
+      width: 800px;
+      background: #df872d;
+      position: static;
+      top: 0;
+    `)}
 
     nav {
       ul {
@@ -107,7 +155,12 @@ export const Container = styled.div`
       display: flex;
       padding: 24px;
       overflow: hidden;
-      flex: 1;
+      /* flex: 1; */
+      color: #eee;
+
+      ${mixins.sm(css`
+        color: #000;
+      `)}
 
       .list {
         display: flex;
@@ -116,7 +169,11 @@ export const Container = styled.div`
         ul {
           list-style: none;
           overflow: auto;
-          padding-right: 8px;
+          padding-right: 0px;
+
+          ${mixins.sm(css`
+            padding-right: 8px;
+          `)}
 
           &::-webkit-scrollbar-track {
             background-color: #df872d;
@@ -132,9 +189,9 @@ export const Container = styled.div`
           li {
             display: flex;
             align-items: center;
-            font-size: 24px;
+            font-size: 18px;
             font-weight: bold;
-            background: rgba(0, 0, 0, 0.2);
+            background: #222;
             padding: 8px 24px;
             margin-bottom: 16px;
             color: #fff;
@@ -142,6 +199,11 @@ export const Container = styled.div`
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s ease;
+
+            ${mixins.sm(css`
+              font-size: 24px;
+              background: rgba(0, 0, 0, 0.2);
+            `)}
 
             &:hover {
               background: rgba(0, 0, 0, 0.5);
@@ -163,7 +225,7 @@ export const Container = styled.div`
         max-width: 250px;
         margin-left: auto;
         padding-left: 24px;
-        display: flex;
+        display: none;
         flex-direction: column;
         justify-content: center;
 
@@ -172,6 +234,10 @@ export const Container = styled.div`
           line-height: 1;
           margin-bottom: 8px;
         }
+
+        ${mixins.sm(css`
+          display: flex;
+        `)}
       }
 
       & > div:first-child {
@@ -223,7 +289,7 @@ export const Container = styled.div`
             }
 
             div {
-              border: dashed 3px rgba(51, 51, 51, 0.363);
+              border: dashed 2px #df872d;
               padding: 10px 16px;
               border-radius: 8px;
               flex: 1;
@@ -234,13 +300,22 @@ export const Container = styled.div`
               text-align: center;
               font-size: 18px;
 
+              ${mixins.sm(css`
+                border: dashed 3px rgba(51, 51, 51, 0.363);
+              `)}
+
               span {
                 position: absolute;
-                background: #df872d;
+                background: #111;
                 top: -12px;
                 padding: 0 8px;
                 font-weight: 300;
-                color: #333;
+                color: #df872d;
+
+                ${mixins.sm(css`
+                  color: #333;
+                  background: #df872d;
+                `)}
               }
             }
           }
@@ -250,12 +325,20 @@ export const Container = styled.div`
   }
 
   aside {
-    width: 400px;
+    width: 100%;
     position: relative;
     display: flex;
-    height: 100%;
+    min-height: 60vh;
     cursor: pointer;
     overflow: hidden;
+    position: fixed;
+    z-index: 1;
+
+    ${mixins.sm(css`
+      width: 400px;
+      position: relative;
+      z-index: auto;
+    `)}
 
     ${({ position }) =>
       position === 0 &&

@@ -1,5 +1,5 @@
 import Description from 'components/Description';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { Container } from './styles';
 
@@ -9,6 +9,17 @@ function CardsCarousel({ changeCurrent, current, data, isJutsu }) {
   useEffect(() => {
     setShowOne(false);
   }, [current]);
+
+  const handleOnNext = useCallback(
+    isNext => {
+      if (isNext) {
+        changeCurrent(current + 1);
+      } else {
+        changeCurrent(current - 1);
+      }
+    },
+    [current, changeCurrent],
+  );
 
   return (
     <Container>
@@ -95,6 +106,8 @@ function CardsCarousel({ changeCurrent, current, data, isJutsu }) {
                 setShowOne={setShowOne}
                 showOne={showOne}
                 isJutsu={isJutsu}
+                onNext={handleOnNext}
+                isDrag
                 data={{
                   ...item,
                   position,

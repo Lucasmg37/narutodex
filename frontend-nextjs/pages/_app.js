@@ -1,6 +1,9 @@
 import React from 'react';
 import Head from 'next/head';
 import '../styles/globals.css';
+import { Container } from '../styles/App';
+
+import TabNavigation from '../components/TabNavigation';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -12,7 +15,10 @@ function MyApp({ Component, pageProps }) {
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
         />
       </Head>
-      <Component {...pageProps} />
+      <Container>
+        <Component {...pageProps} />
+        <TabNavigation />
+      </Container>
     </>
   );
 }

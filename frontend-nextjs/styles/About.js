@@ -1,22 +1,32 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { mixins } from './responsive';
 
 export const Container = styled.div`
   display: flex;
-  min-height: 100vh;
   width: 100vw;
   background: #111;
   flex-direction: column;
+  flex: 1;
+  overflow: auto;
+
+  ${mixins.sm(css`
+    min-height: 100vh;
+  `)}
 
   section + section {
     display: flex;
     flex-direction: column;
     margin: auto;
     padding: 8px;
-    width: 900px;
-    max-width: 90vw;
+    width: 100%;
     background: #222;
-    border-radius: 40px;
-    margin-bottom: 24px;
+
+    ${mixins.sm(css`
+      max-width: 90vw;
+      width: 900px;
+      border-radius: 40px;
+      margin-bottom: 24px;
+    `)}
 
     h1 {
       color: #df872d;
@@ -46,7 +56,6 @@ export const Container = styled.div`
       }
 
       :nth-child(5) {
-        /* background: #111; */
         border-radius: 24px;
 
         > div {
@@ -61,6 +70,11 @@ export const Container = styled.div`
             div {
               display: flex;
               margin-top: 8px;
+              flex-direction: column;
+
+              ${mixins.sm(css`
+                flex-direction: row;
+              `)}
             }
 
             a {
@@ -70,6 +84,11 @@ export const Container = styled.div`
               align-items: center;
               font-weight: lighter;
               transition: all 0.2s ease-in-out;
+              margin-top: 8px;
+
+              ${mixins.sm(css`
+                margin-top: 0;
+              `)}
 
               svg {
                 margin-right: 4px;

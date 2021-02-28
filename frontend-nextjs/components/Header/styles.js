@@ -1,9 +1,15 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Container as Brand } from '../Brand/styles';
 import { Container as InputSearch } from '../InputSearch/styles';
+import { mixins } from '../../styles/responsive';
 
 export const Container = styled.section`
   padding: 64px 64px 16px;
+  display: none;
+
+  ${mixins.sm(css`
+    display: block;
+  `)}
 
   ul {
     list-style: none;

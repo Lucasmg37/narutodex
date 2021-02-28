@@ -1,9 +1,17 @@
 import styled, { css } from 'styled-components';
+import { mixins } from 'styles/responsive';
 
 export const Container = styled.section`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  height: 100%;
+  width: 100%;
+
+  ${mixins.sm(css`
+    position: static;
+    align-items: center;
+    justify-content: center;
+  `)}
 
   ${({ showStamps }) =>
     showStamps &&
@@ -24,7 +32,7 @@ export const Container = styled.section`
     background: none;
     width: 64px;
     height: 64px;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
@@ -33,6 +41,10 @@ export const Container = styled.section`
     cursor: pointer;
     border: 3px solid #df872d;
     transition: all ease-in-out 0.2s;
+
+    ${mixins.sm(css`
+      display: flex;
+    `)}
 
     &:hover {
       background: #df872d;

@@ -10,6 +10,7 @@ export const Container = styled.div`
   z-index: 10;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   background: rgba(0, 0, 0, 0.3);
   top: 0;
   left: 0;

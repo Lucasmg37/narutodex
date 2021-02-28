@@ -1,11 +1,20 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { mixins } from './responsive';
 
 export const Container = styled.div`
   display: flex;
-  min-height: 100vh;
+  flex: 1;
+  overflow: auto;
   width: 100vw;
-  background: rgba(17, 17, 17, 0.9);
+  background: #111;
   flex-direction: column;
+
+  position: relative;
+
+  ${mixins.sm(css`
+    min-height: 100vh;
+    background: rgba(17, 17, 17, 0.9);
+  `)}
 
   .background {
     position: absolute;
@@ -14,5 +23,12 @@ export const Container = styled.div`
     object-fit: cover;
     filter: blur(5px);
     z-index: -1;
+
+    display: none;
+
+    ${mixins.sm(css`
+      min-height: 100vh;
+      display: block;
+    `)}
   }
 `;

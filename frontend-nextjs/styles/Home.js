@@ -1,10 +1,16 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { mixins } from './responsive';
 
 export const Container = styled.div`
   display: flex;
-  min-height: 100vh;
+  flex: 1;
   width: 100vw;
+  overflow: auto;
   background: rgba(17, 17, 17, 0.9);
+
+  ${mixins.sm(css`
+    min-height: 100vh;
+  `)}
 
   main {
     display: flex;
