@@ -23,7 +23,7 @@ function TabNavigation({ showSwitch = true, switcher }) {
 
     let randomType = false;
 
-    if (showSwitch) {
+    if (showSwitch && switcher) {
       if (switcher.selected === 'JUTSU') {
         randomType = 'jutsu';
       }

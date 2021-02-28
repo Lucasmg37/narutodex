@@ -24,7 +24,7 @@ function Header({ showSwitch = true, showSearch = false, showGoBack = false, sea
 
     let randomType = false;
 
-    if (showSwitch) {
+    if (showSwitch && switcher) {
       if (switcher.selected === 'JUTSU') {
         randomType = 'jutsu';
       }
