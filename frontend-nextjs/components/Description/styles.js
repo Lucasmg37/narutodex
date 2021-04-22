@@ -14,10 +14,7 @@ export const LiNav = styled.li`
   transition: ease 0.2s all;
   border-radius: 0px;
   margin: 0px;
-
   font-weight: bold;
-
-  border-bottom: 2px solid ${({ isActive }) => (isActive ? '#df872d' : '#222')};
 
   ${mixins.sm(css`
     margin: 8px;
@@ -173,9 +170,9 @@ export const Container = styled.div`
       display: flex;
       padding: 24px;
       overflow: hidden;
-      /* flex: 1; */
       color: #eee;
       background: #111;
+      min-height: 100%;
 
       ${mixins.sm(css`
         background: transparent;
@@ -266,6 +263,8 @@ export const Container = styled.div`
       & > div:first-child {
         display: flex;
         flex-direction: column;
+        flex: 1;
+
         & > h3 {
           font-size: 24px;
           margin-bottom: 24px;
