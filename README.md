@@ -6,7 +6,7 @@
 
 ### 💥 O que é?
 
-Como o próprio nome sugeri, NARUTODEX é uma espécie de [Pokédex](https://pokemon.fandom.com/pt-br/wiki/Pok%C3%A9dex) do universo Naruto. Nela você pode Encontrar Técnicas e Personagens da franquia, bem como suas informações. É possível descobrir os Justsus de um Personagem ou os Personagens que executam determinada técnica. Além disso as técnicas têm os selos utilizados para a sua execução.
+Como o próprio nome sugere, NARUTODEX é uma espécie de [Pokédex](https://pokemon.fandom.com/pt-br/wiki/Pok%C3%A9dex) do universo Naruto. Nela você pode Encontrar Técnicas e Personagens da franquia, bem como suas informações. É possível descobrir os Jutsus de um Personagem ou os Personagens que executam determinada técnica. Além disso, as técnicas têm os selos utilizados para a sua execução.
 
 ### 💡 Motivação
 
@@ -24,7 +24,7 @@ Todas as informações consumidas pertencem a [Naruto Wiki](https://naruto.fando
 
 #### Front-End
 
-Esé é um projeto [Next.js](https://nextjs.org/) inicializado com o [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Esse é um projeto [Next.js](https://nextjs.org/) iniciado com o [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 - [NEXT.js](https://nextjs.org/)
 - [framer-motion](https://www.framer.com/motion/)
@@ -68,7 +68,7 @@ Ter [Yarn](https://classic.yarnpkg.com/pt-BR/docs/install/) instalado.
   $ yarn run dev 
 ```
 
-O back-end será inicializada no endereço [http://localhost:3333](http://localhost:3333).
+O back-end será inicializado no endereço [http://localhost:3333](http://localhost:3333).
 
 #### 🖌 Iniciando front-end
 ```bash
@@ -80,7 +80,7 @@ O back-end será inicializada no endereço [http://localhost:3333](http://localh
   $ yarn run dev
 ```
 
-O fron-tend será inicializada no endereço [http://localhost:3000](http://localhost:3000).
+O fron-tend será inicializado no endereço [http://localhost:3000](http://localhost:3000).
 
 
 > ***Importante***
@@ -99,7 +99,7 @@ O fron-tend será inicializada no endereço [http://localhost:3000](http://local
 
 A CLI, foi criada para a inserção e atualização dos dados na base de dados dos dados provenientes do Fandom.
 
-Ela é responsável por coletar os dados das páginas (HTML) extrai-los e organiza-los de maneira relacional no banco de dados.
+Ela é responsável por coletar os dados das páginas (HTML) e organizá-los de maneira relacional no banco de dados.
 
 Para executar a CLI execute o seguinte comando em seu terminal estando na pasta ***backend***.
 
@@ -110,7 +110,7 @@ Para executar a CLI execute o seguinte comando em seu terminal estando na pasta 
 
 > ***Importante***
 >
-> A CLI não está totalmente criada, portanto não é possível executar todas funções necessárias. Opte por usar o banco vesionado no projeto.
+> A CLI não está totalmente criada, portanto não é possível executar todas as funções necessárias. Opte por usar o banco versionado no projeto.
 
 ### 🤝 Colabore
 
@@ -138,7 +138,7 @@ Fique a vontade para abrir uma issue ou um Pull Request para o projeto. Conto co
 
 - [ ] Finalizar CLI para busca e tratamento de dados
 
-- [ ] Adicionar Elementos dos Justsus
+- [ ] Adicionar Elementos dos Jutsus
 
 - [ ] Adicionar Clã e Habilidades dos Personagens
 
