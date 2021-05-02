@@ -2,6 +2,8 @@
 
 ## Uma plataforma para procurar dados de Jutsus e Personagens de Naruto
 
+![NARUTODEX](https://user-images.githubusercontent.com/25160385/116827680-b79ae280-ab70-11eb-97a6-35de3d43eff3.gif)
+
 ### 💥 O que é?
 
 Como o próprio nome sugeri, NARUTODEX é uma espécie de [Pokédex](https://pokemon.fandom.com/pt-br/wiki/Pok%C3%A9dex) do universo Naruto. Nela você pode Encontrar Técnicas e Personagens da franquia, bem como suas informações. É possível descobrir os Justsus de um Personagem ou os Personagens que executam determinada técnica. Além disso as técnicas têm os selos utilizados para a sua execução.
@@ -41,8 +43,11 @@ Esé é um projeto [Next.js](https://nextjs.org/) inicializado com o [`create-ne
 
 ### 📚 Requisitos
 Ter [Git](https://git-scm.com/) para clonar o projeto.
+
 Ter [Node.js](https://nodejs.org) instalado.
+
 Ter [Yarn](https://classic.yarnpkg.com/pt-BR/docs/install/) instalado.
+
 ### ⚙ Executando
 
 #### 🚀 Começando
