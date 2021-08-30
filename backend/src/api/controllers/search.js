@@ -7,7 +7,7 @@ module.exports = {
 
     try {
       if (!q) {
-        throw 'O pesquisa deve ter no mínimo 3 caracters.'
+        throw 'A pesquisa deve conter no mínimo 3 caracteres.'
       }
 
       const jutsus = await Jutsu.findAll({
