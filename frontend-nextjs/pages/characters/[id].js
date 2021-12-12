@@ -24,21 +24,8 @@ function characters({ character }) {
 }
 
 export async function getStaticPaths() {
-  const { data } = await api.get('character');
-
-  const paths = data.data.map(item => {
-    const obj = {
-      params: {
-        id: `${item.id}`,
-        item,
-      },
-    };
-
-    return obj;
-  });
-
   return {
-    paths,
+    paths: [],
     fallback: 'blocking',
   };
 }
