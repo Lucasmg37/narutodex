@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import api from 'services/api';
 
 import Description from 'components/Description';
@@ -7,18 +7,7 @@ import { Container } from '../../styles/Description';
 
 import Header from '../../components/Header';
 
-function jutsus({ id }) {
-  const [jutsu, setJutsu] = useState({});
-
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await api.get(`jutsu/${id}`);
-      setJutsu(data.data);
-    };
-
-    getData();
-  }, [id]);
-
+function jutsus({ jutsu }) {
   return (
     <Container>
       <Head>
@@ -35,28 +24,18 @@ function jutsus({ id }) {
 }
 
 export async function getStaticPaths() {
-  const { data } = await api.get('jutsu');
-
-  const paths = data.data.map(item => {
-    const obj = {
-      params: {
-        id: `${item.id}`,
-      },
-    };
-
-    return obj;
-  });
-
   return {
-    paths,
-    fallback: false,
+    paths: [],
+    fallback: 'blocking',
   };
 }
 
 export async function getStaticProps({ params }) {
+  const { data } = await api.get(`jutsu/${params.id}`);
+
   return {
     props: {
-      id: params.id,
+      jutsu: data.data,
     },
   };
 }
