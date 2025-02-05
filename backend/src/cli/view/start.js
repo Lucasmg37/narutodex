@@ -1,8 +1,8 @@
 const inquirer = require('inquirer')
-const { START_ALL, START_GET, START_TREATMENT } = require('../constants')
+const { START_ALL, START_TREATMENT, GET_CHARACTERS_IMAGE_DOWNLOAD, POPULAR_BASE_DE_DADOS } = require('../constants')
 const { questionsStart } = require('../questions/main')
 const { index } = require('./treatment')
-const { index: get } = require('./get')
+const { initAllDataBase } = require('../controller')
 
 module.exports = {
   index: () => {
@@ -13,11 +13,11 @@ module.exports = {
         case START_ALL:
           console.log('To Do')
           break
-        case START_GET:
-          get()
-          break
         case START_TREATMENT:
           index()
+          break
+        case POPULAR_BASE_DE_DADOS:
+          initAllDataBase()
           break
       }
     })

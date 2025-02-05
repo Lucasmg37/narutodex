@@ -1,11 +1,9 @@
-const { Stamp, GroupJutsusStamp, StampsSequence } = require('../../models')
-
 module.exports = {
-/**
- * @var String step
- * @var String nameStamp
- */
-  createStampAndRelationship: async (nameStamp, jutsuId, order = 1, isSimultaneous = false, variant = false, step = null) => {
+  /**
+   * @var String step
+   * @var String nameStamp
+   */
+  createStampAndRelationship: async (nameStamp, order = 1, isSimultaneous = false, variant = false, step = null) => {
     // Evitando duplicados de nameStamp
     nameStamp = nameStamp.toLowerCase()
     nameStamp = nameStamp.replace('selo de uma mão', '')
@@ -60,9 +58,9 @@ module.exports = {
     }
 
     if (nameStamp === 'bater as mãos no chão' ||
-    nameStamp === 'bater no chão' ||
-    nameStamp === 'ambas as palmas das mãos no chão' ||
-    nameStamp === 'batida de mãos no chão') {
+      nameStamp === 'bater no chão' ||
+      nameStamp === 'ambas as palmas das mãos no chão' ||
+      nameStamp === 'batida de mãos no chão') {
       nameStamp = 'bater as mãos no solo'
     }
 
@@ -124,11 +122,7 @@ module.exports = {
 
     nameStamp = nameStamp[0].toUpperCase() + nameStamp.substring(1)
 
-    const [stamp] = await Stamp.findOrCreate({ where: { name: nameStamp, image } })
-
-    const whereGroupJutsusStamps = {
-      jutsuId
-    }
+    const whereGroupJutsusStamps = {}
 
     if (isSimultaneous) {
       whereGroupJutsusStamps.isSimultaneous = isSimultaneous
@@ -142,17 +136,6 @@ module.exports = {
       whereGroupJutsusStamps.step = step
     }
 
-    const [groupJutsusStamp] = await GroupJutsusStamp.findOrCreate({
-      where: whereGroupJutsusStamps
-    })
-
-    await StampsSequence.findOrCreate({
-      where: {
-        stampId: stamp.id,
-        groupJutsusStampId: groupJutsusStamp.id,
-        order
-      }
-    })
+    return { ...whereGroupJutsusStamps, order, name: nameStamp, image }
   }
-
 }

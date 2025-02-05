@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1272.0",
     "axios": "^0.21.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -22,7 +23,8 @@
     "ora": "^5.1.0",
     "sequelize": "^6.3.5",
     "serve-index": "^1.9.1",
-    "sqlite3": "^5.0.0"
+    "sqlite3": "^5.0.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "eslint": "^7.12.1",
